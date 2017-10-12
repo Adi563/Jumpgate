@@ -1,0 +1,28 @@
+<?xml version="1.0" encoding="UTF-8"?>
+<xs:schema attributeFormDefault="unqualified" elementFormDefault="qualified" xmlns:xs="http://www.w3.org/2001/XMLSchema" version="1.0.0">
+	<xs:complexType name="Sector">
+		<xs:sequence>
+			<xs:element type="xs:unsignedInt" name="SectorId" minOccurs="1" maxOccurs="1" />
+			<xs:element type="xs:string" name="Name" minOccurs="1" maxOccurs="1" />
+		</xs:sequence>
+	</xs:complexType>
+	
+	<xs:complexType name="Gate">
+		<xs:sequence>
+			<xs:element type="xs:unsignedInt" name="SectorInId" minOccurs="1" maxOccurs="1" />
+			<xs:element type="xs:unsignedInt" name="LeadingToId" minOccurs="1" maxOccurs="1" />
+			<xs:element type="xs:int" name="X" minOccurs="1" maxOccurs="1" />
+			<xs:element type="xs:int" name="Y" minOccurs="1" maxOccurs="1" />
+			<xs:element type="xs:int" name="Z" minOccurs="1" maxOccurs="1" />
+		</xs:sequence>
+	</xs:complexType>
+	
+	<xs:element name="Database">
+		<xs:complexType>
+			<xs:sequence>
+				<xs:element type="Sector" name="Sectors" minOccurs="0" maxOccurs="unbounded" />
+				<xs:element type="Gate" name="Gates" minOccurs="0" maxOccurs="unbounded" />
+			</xs:sequence>
+		</xs:complexType>
+	</xs:element>
+</xs:schema>
