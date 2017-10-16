@@ -34,8 +34,23 @@ namespace Launcher.Gui
                 CreateNoWindow = false,
                 FileName = @"C:\Games\Jumpgate\Jumpgate.exe",
                 WorkingDirectory = @"C:\Games\Jumpgate\",
+                UseShellExecute = false
             };
-            System.Diagnostics.Process.Start(processStartInfo);
+            var process = System.Diagnostics.Process.Start(processStartInfo);
+
+            if (!checkBoxAutoLogin.Checked) { return; }
+
+            System.Threading.Thread.Sleep(7000);
+
+            // Click connect
+            User32.SendMessage(process.MainWindowHandle, 0x200, 0, 0x014B015F);
+            User32.SendMessage(process.MainWindowHandle, 0x201, 0, 0);
+            User32.SendMessage(process.MainWindowHandle, 0x202, 0, 0);
+
+            // Click login
+            User32.SendMessage(process.MainWindowHandle, 0x200, 0, 0x011A01B6);
+            User32.SendMessage(process.MainWindowHandle, 0x201, 0, 0);
+            User32.SendMessage(process.MainWindowHandle, 0x202, 0, 0);
         }
     }
 }

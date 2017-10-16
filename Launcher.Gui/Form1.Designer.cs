@@ -37,6 +37,7 @@
             this.bindingSourceUser = new System.Windows.Forms.BindingSource(this.components);
             this.textBoxChatRoom = new System.Windows.Forms.TextBox();
             this.labelChatRoom = new System.Windows.Forms.Label();
+            this.checkBoxAutoLogin = new System.Windows.Forms.CheckBox();
             ((System.ComponentModel.ISupportInitialize)(this.bindingSourceUser)).BeginInit();
             this.SuspendLayout();
             // 
@@ -101,11 +102,24 @@
             this.labelChatRoom.TabIndex = 5;
             this.labelChatRoom.Text = "Chatroom";
             // 
+            // checkBoxAutoLogin
+            // 
+            this.checkBoxAutoLogin.AutoSize = true;
+            this.checkBoxAutoLogin.Checked = true;
+            this.checkBoxAutoLogin.CheckState = System.Windows.Forms.CheckState.Checked;
+            this.checkBoxAutoLogin.Location = new System.Drawing.Point(15, 94);
+            this.checkBoxAutoLogin.Name = "checkBoxAutoLogin";
+            this.checkBoxAutoLogin.Size = new System.Drawing.Size(77, 17);
+            this.checkBoxAutoLogin.TabIndex = 7;
+            this.checkBoxAutoLogin.Text = "Auto Login";
+            this.checkBoxAutoLogin.UseVisualStyleBackColor = true;
+            // 
             // Form1
             // 
             this.AutoScaleDimensions = new System.Drawing.SizeF(6F, 13F);
             this.AutoScaleMode = System.Windows.Forms.AutoScaleMode.Font;
             this.ClientSize = new System.Drawing.Size(204, 125);
+            this.Controls.Add(this.checkBoxAutoLogin);
             this.Controls.Add(this.textBoxChatRoom);
             this.Controls.Add(this.labelChatRoom);
             this.Controls.Add(this.textBoxPassword);
@@ -131,6 +145,7 @@
         private System.Windows.Forms.BindingSource bindingSourceUser;
         private System.Windows.Forms.TextBox textBoxChatRoom;
         private System.Windows.Forms.Label labelChatRoom;
+        private System.Windows.Forms.CheckBox checkBoxAutoLogin;
     }
 }
 
