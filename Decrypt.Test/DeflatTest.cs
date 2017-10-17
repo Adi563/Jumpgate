@@ -29,16 +29,35 @@ namespace Decrypt.Test
         }
 
         [TestMethod]
-        public void TestMethod1()
+        public void CompressData()
         {
-            byte[] data = new byte[] { 0x74, 0x11, 0x09, 0x41, 0x04, 0xb9, 0xd4, 0xfe, 0x4d, 0x5f, 0x9d, 0x84, 0x71, 0x23, 0x73, 0x7b, 0x9c, 0x42, 0x63, 0xf0, 0x0c, 0x3b, 0x45, 0xf2, 0x43, 0xb8, 0xd8, 0xfa, 0x94, 0xa6, 0xe2, 0x69, 0xf5, 0x3b, 0xd2, 0xb6, 0xa3, 0x5a, 0x1c, 0x60, 0x0f, 0x45, 0x84, 0x84, 0x50, 0x80, 0x20, 0x71 };
+            var data = System.Text.Encoding.ASCII.GetBytes("test");
+            byte[] data2;
+            using (var streamUncompressed = new System.IO.MemoryStream(data))
+            using (var streamCompressed = new System.IO.MemoryStream())
+            {
+                var deflateStream = new System.IO.Compression.DeflateStream(streamCompressed, System.IO.Compression.CompressionMode.Compress, true);
+                streamUncompressed.CopyTo(deflateStream);
+                deflateStream.Close();
 
-            var streamCompressed = new System.IO.MemoryStream(data);
-            var streamDecompressed = new System.IO.MemoryStream();
-            
+                data2 = streamCompressed.ToArray();
+            }
+        }
 
-            var deflateStream = new System.IO.Compression.DeflateStream(streamCompressed, System.IO.Compression.CompressionMode.Decompress);
-            deflateStream.CopyTo(streamDecompressed);
+        [TestMethod]
+        public void DecompressData()
+        {
+            byte[] data = new byte[] { 43, 73, 45, 46, 1, 0 };
+            var data2 = new byte[100];
+
+            using (var streamUncompressed = new System.IO.MemoryStream(data2))
+            using (var streamCompressed = new System.IO.MemoryStream(data))
+            {
+                var deflateStream = new System.IO.Compression.DeflateStream(streamCompressed, System.IO.Compression.CompressionMode.Decompress);
+                deflateStream.CopyTo(streamUncompressed);
+                deflateStream.Flush();
+                deflateStream.Close();
+            }
         }
     }
 }
