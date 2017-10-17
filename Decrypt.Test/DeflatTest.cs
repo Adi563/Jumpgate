@@ -48,15 +48,17 @@ namespace Decrypt.Test
         public void DecompressData()
         {
             byte[] data = new byte[] { 43, 73, 45, 46, 1, 0 };
-            var data2 = new byte[100];
+            byte[] data2;
 
-            using (var streamUncompressed = new System.IO.MemoryStream(data2))
+            using (var streamUncompressed = new System.IO.MemoryStream())
             using (var streamCompressed = new System.IO.MemoryStream(data))
             {
-                var deflateStream = new System.IO.Compression.DeflateStream(streamCompressed, System.IO.Compression.CompressionMode.Decompress);
+                var deflateStream = new System.IO.Compression.DeflateStream(streamCompressed, System.IO.Compression.CompressionMode.Decompress, true);
                 deflateStream.CopyTo(streamUncompressed);
                 deflateStream.Flush();
                 deflateStream.Close();
+
+                data2 = streamUncompressed.ToArray();
             }
         }
     }
