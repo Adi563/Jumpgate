@@ -53,9 +53,10 @@
     </Otherwise>
   </Choose>
   <ItemGroup>
+    <Compile Include="DeflatTest.cs" />
     <Compile Include="NumberFactorizerTest.cs" />
     <Compile Include="Properties\AssemblyInfo.cs" />
-    <Compile Include="DeflatTest.cs" />
+    <Compile Include="AesTest.cs" />
   </ItemGroup>
   <Choose>
     <When Condition="'$(VisualStudioVersion)' == '10.0' And '$(IsCodedUITest)' == 'True'">
