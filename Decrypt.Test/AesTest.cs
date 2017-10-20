@@ -22,7 +22,7 @@ namespace Decrypt.Test
             var encryptor = aes.CreateEncryptor();
             var encryptedData = encryptor.TransformFinalBlock(decryptedData, 0, decryptedData.Length);
 
-            string bla = string.Join(",0x", encryptedData.Select(b => b.ToString("X2")));
+            string encryptedDataString = string.Join(",", encryptedData.Select(b => "0x" + b.ToString("X2")));
         }
 
         [TestMethod]
