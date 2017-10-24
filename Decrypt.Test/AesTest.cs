@@ -11,16 +11,18 @@ namespace Decrypt.Test
         [TestMethod]
         public void Encrypt()
         {
-            var decryptedData = System.Text.Encoding.ASCII.GetBytes("Test ist ein Testxxx");
+            var decryptedData = System.Text.Encoding.ASCII.GetBytes("Test ist ein Testxxx".PadRight(32));
 
             var aes = System.Security.Cryptography.Aes.Create();
             aes.KeySize = 128;
             aes.Key = new byte[] { 0x27, 0x8c, 0x9b, 0xd8, 0xcc, 0xca, 0x0f, 0x86, 0x4b, 0x0c, 0xa3, 0x02, 0x20, 0xc5, 0x87, 0xa2 };
-            aes.IV = new byte[] { 0x06, 0xa3, 0xa1, 0xab, 0x1e, 0x10, 0x9c, 0xa9, 0x40, 0x14, 0xd7, 0x2f, 0x40, 0xdf, 0x51, 0x73 };
+            aes.GenerateIV();
             aes.Padding = System.Security.Cryptography.PaddingMode.Zeros;
 
+            var decryptedDataWithIv = decryptedData.Concat(aes.IV).ToArray();
+
             var encryptor = aes.CreateEncryptor();
-            var encryptedData = encryptor.TransformFinalBlock(decryptedData, 0, decryptedData.Length);
+            var encryptedData = encryptor.TransformFinalBlock(decryptedDataWithIv, 0, decryptedDataWithIv.Length);
 
             string encryptedDataString = string.Join(",", encryptedData.Select(b => "0x" + b.ToString("X2")));
         }
@@ -28,18 +30,22 @@ namespace Decrypt.Test
         [TestMethod]
         public void Decrypt()
         {
-            var encryptedData = new byte[] { 0x79, 0x6E, 0x87, 0x14, 0x4B, 0x80, 0x95, 0x5D, 0xB4, 0xA1, 0x92, 0xAB, 0x93, 0xD4, 0x24, 0x7B, 0x42, 0x03, 0x79, 0xF9, 0x17, 0x5C, 0x0C, 0x92, 0xFB, 0x62, 0x10, 0x3B, 0x3F, 0x74, 0x3E, 0x59 };
+            var encryptedData = new byte[] { 0x23, 0x3C, 0x96, 0x4A, 0x8D, 0x98, 0x96, 0xC6, 0xFC, 0xB2, 0x37, 0x17, 0xC2, 0x7E, 0x83, 0xA8, 0x3D, 0xAB, 0xA6, 0xC7, 0x0E, 0xD5, 0xD6, 0x1F, 0x13, 0xBB, 0x33, 0x87, 0x9B, 0xA9, 0x9F, 0x75, 0x27, 0xAC, 0x0C, 0x40, 0x00, 0xCB, 0x5E, 0x13, 0xA7, 0xB5, 0xB6, 0x36, 0xCE, 0xBE, 0xF4, 0xA9 };
 
             var aes = System.Security.Cryptography.Aes.Create();
             aes.KeySize = 128;
             aes.Key = new byte[] { 0x27, 0x8c, 0x9b, 0xd8, 0xcc, 0xca, 0x0f, 0x86, 0x4b, 0x0c, 0xa3, 0x02, 0x20, 0xc5, 0x87, 0xa2 };
-            aes.IV = new byte[] { 0x06, 0xa3, 0xa1, 0xab, 0x1e, 0x10, 0x9c, 0xa9, 0x40, 0x14, 0xd7, 0x2f, 0x40, 0xdf, 0x51, 0x73 };
-            //aes.GenerateIV();
+            aes.GenerateIV();
             aes.Padding = System.Security.Cryptography.PaddingMode.Zeros;
 
             var decryptor = aes.CreateDecryptor();
-            var decryptedData = new byte[encryptedData.Length];
-            decryptor.TransformBlock(encryptedData, 0, encryptedData.Length, decryptedData, 0);
+            var decryptedDataWtihIv = new byte[encryptedData.Length];
+            decryptor.TransformBlock(encryptedData, 0, encryptedData.Length, decryptedDataWtihIv, 0);
+
+            aes.IV = decryptedDataWtihIv.Skip(32).Take(16).ToArray();
+            var decryptedData = new byte[decryptedDataWtihIv.Length - 16];
+            decryptor = aes.CreateDecryptor();
+            decryptor.TransformBlock(encryptedData, 0, decryptedData.Length, decryptedData, 0);
 
             System.Diagnostics.Debug.Write(System.Text.Encoding.ASCII.GetString(decryptedData));
         }
