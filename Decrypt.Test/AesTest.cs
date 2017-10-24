@@ -51,6 +51,56 @@ namespace Decrypt.Test
         }
 
         [TestMethod]
+        public void EncryptAndSignAndAddInitialisationVecor()
+        {
+            var decryptedData = System.Text.Encoding.ASCII.GetBytes("Test ist ein xxx".PadRight(16));
+
+            var aes = System.Security.Cryptography.Aes.Create();
+            aes.KeySize = 128;
+            aes.Key = new byte[] { 0x27, 0x8c, 0x9b, 0xd8, 0xcc, 0xca, 0x0f, 0x86, 0x4b, 0x0c, 0xa3, 0x02, 0x20, 0xc5, 0x87, 0xa2 };
+            aes.IV = new byte[] { 0x22, 0x8c, 0x9b, 0xd8, 0xcc, 0xca, 0x0f, 0x86, 0x4b, 0x0c, 0xa3, 0x02, 0x20, 0xc5, 0x87, 0xa2 };
+            aes.Padding = System.Security.Cryptography.PaddingMode.None;
+
+            // Sign plaintext. Concat plaintext with last block of encryption
+            var encryptor = aes.CreateEncryptor();
+            var signatureData = encryptor.TransformFinalBlock(decryptedData, 0, decryptedData.Length);
+
+            //Add IV and encrypt plaintext message with signature
+            var decryptedDataWithSignatureAndIv = decryptedData.Concat(signatureData).Concat(aes.IV).ToArray();
+            var encryptedData = encryptor.TransformFinalBlock(decryptedDataWithSignatureAndIv, 0, decryptedDataWithSignatureAndIv.Length);
+
+            string encryptedDataString = string.Join(",", encryptedData.Select(b => "0x" + b.ToString("X2")));
+        }
+
+        [TestMethod]
+        public void DecryptAndCheckSignature()
+        {
+            var encryptedData = new byte[] { 0x8E, 0xF2, 0x30, 0x9E, 0x81, 0x5E, 0xFB, 0x9D, 0x30, 0x21, 0x2B, 0x3A, 0xA7, 0x9F, 0x21, 0xFD, 0x09, 0x64, 0x12, 0x2D, 0xC1, 0xDC, 0x01, 0xFA, 0xA6, 0xB7, 0xF8, 0xB0, 0x42, 0x4F, 0x8C, 0xD1, 0x02, 0x36, 0xEE, 0x02, 0xD3, 0xB4, 0x54, 0xF6, 0xD0, 0x17, 0x7F, 0x04, 0xD9, 0x0A, 0xF8, 0xF8 };
+
+            var aes = System.Security.Cryptography.Aes.Create();
+            aes.KeySize = 128;
+            aes.Key = new byte[] { 0x27, 0x8c, 0x9b, 0xd8, 0xcc, 0xca, 0x0f, 0x86, 0x4b, 0x0c, 0xa3, 0x02, 0x20, 0xc5, 0x87, 0xa2 };
+            aes.GenerateIV();
+            aes.Padding = System.Security.Cryptography.PaddingMode.None;
+
+            var decryptor = aes.CreateDecryptor();
+            var decryptedDataWithSignatureAndIv = decryptor.TransformFinalBlock(encryptedData, 0, encryptedData.Length);
+
+            aes.IV = decryptedDataWithSignatureAndIv.Skip(decryptedDataWithSignatureAndIv.Length - aes.IV.Length).Take(aes.IV.Length).ToArray();
+            decryptor = aes.CreateDecryptor();
+            decryptedDataWithSignatureAndIv = decryptor.TransformFinalBlock(encryptedData, 0, encryptedData.Length);
+            
+            var signatureData = decryptedDataWithSignatureAndIv.Skip(decryptedDataWithSignatureAndIv.Length - 16 - aes.IV.Length).Take(16).ToArray();
+            var decryptedData = decryptedDataWithSignatureAndIv.Take(decryptedDataWithSignatureAndIv.Length - signatureData.Length - aes.IV.Length).ToArray();
+            System.Diagnostics.Debug.Write(System.Text.Encoding.ASCII.GetString(decryptedData));
+
+            var encryptor = aes.CreateEncryptor();
+            var signatureData2 = encryptor.TransformFinalBlock(decryptedData, 0, decryptedData.Length);
+
+            bool signatureOk = signatureData.SequenceEqual(signatureData2);
+        }
+        
+        [TestMethod]
         public void Decrypt2()
         {
             var aes = System.Security.Cryptography.Aes.Create();
