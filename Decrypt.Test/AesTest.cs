@@ -42,11 +42,11 @@ namespace Decrypt.Test
             var decryptedDataWtihIv = new byte[encryptedData.Length];
             decryptor.TransformBlock(encryptedData, 0, encryptedData.Length, decryptedDataWtihIv, 0);
 
-            aes.IV = decryptedDataWtihIv.Skip(32).Take(16).ToArray();
-            var decryptedData = new byte[decryptedDataWtihIv.Length - 16];
+            aes.IV = decryptedDataWtihIv.Skip(decryptedDataWtihIv.Length - aes.IV.Length).Take(aes.IV.Length).ToArray();
             decryptor = aes.CreateDecryptor();
-            decryptor.TransformBlock(encryptedData, 0, decryptedData.Length, decryptedData, 0);
+            decryptor.TransformBlock(encryptedData, 0, aes.IV.Length, decryptedDataWtihIv, 0);
 
+            var decryptedData = decryptedDataWtihIv.Take(decryptedDataWtihIv.Length - aes.IV.Length).ToArray();
             System.Diagnostics.Debug.Write(System.Text.Encoding.ASCII.GetString(decryptedData));
         }
 
