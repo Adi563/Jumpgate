@@ -102,23 +102,34 @@ namespace Decrypt.Test
             var decryptedData = new byte[encryptedData.Length];
 
             byte[] key = new byte[16];
-            ulong number = 0;
+            ulong number1 = 0;
+            ulong number2 = 0;
 
             //2^0+2^8+2^16+2^24+2^32...
-            
-            while (number++ < 131072)
+
+            while (number2 < uint.MaxValue)
             {
-                key[7] = (byte)(number >> 56);
-                key[6] = (byte)(number >> 48);
-                key[5] = (byte)(number >> 40);
-                key[4] = (byte)(number >> 32);
-                key[3] = (byte)(number >> 24);
-                key[2] = (byte)(number >> 16);
-                key[1] = (byte)(number >> 8);
-                key[0] = (byte)number;
+                key[15] = (byte)(number2 >> 56);
+                key[14] = (byte)(number2 >> 48);
+                key[13] = (byte)(number2 >> 40);
+                key[12] = (byte)(number2 >> 32);
+                key[11] = (byte)(number2 >> 24);
+                key[10] = (byte)(number2 >> 16);
+                key[9] = (byte)(number2 >> 8);
+                key[8] = (byte)number2;
+                key[7] = (byte)(number1 >> 56);
+                key[6] = (byte)(number1 >> 48);
+                key[5] = (byte)(number1 >> 40);
+                key[4] = (byte)(number1 >> 32);
+                key[3] = (byte)(number1 >> 24);
+                key[2] = (byte)(number1 >> 16);
+                key[1] = (byte)(number1 >> 8);
+                key[0] = (byte)number1;
+                
+                if (number1 == ulong.MaxValue) { number2++; }
+                number1++;
 
                 aes.Key = key;
-
                 var decryptor = aes.CreateDecryptor();
                 decryptor.TransformBlock(encryptedData, 0, encryptedData.Length, decryptedData, 0);
 
