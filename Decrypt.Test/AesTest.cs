@@ -158,39 +158,70 @@ namespace Decrypt.Test
             var decryptedData = new byte[encryptedData.Length];
 
             byte[] key = new byte[16];
-            ulong number1 = 0;
+            ulong number1 = ulong.MaxValue - 1;
             ulong number2 = 0;
 
             //2^0+2^8+2^16+2^24+2^32...
-
-            while (number2 < uint.MaxValue)
+            
+            while (number2 < ulong.MaxValue)
             {
-                key[15] = (byte)(number2 >> 56);
-                key[14] = (byte)(number2 >> 48);
-                key[13] = (byte)(number2 >> 40);
-                key[12] = (byte)(number2 >> 32);
-                key[11] = (byte)(number2 >> 24);
-                key[10] = (byte)(number2 >> 16);
-                key[9] = (byte)(number2 >> 8);
-                key[8] = (byte)number2;
-                key[7] = (byte)(number1 >> 56);
-                key[6] = (byte)(number1 >> 48);
-                key[5] = (byte)(number1 >> 40);
-                key[4] = (byte)(number1 >> 32);
-                key[3] = (byte)(number1 >> 24);
-                key[2] = (byte)(number1 >> 16);
-                key[1] = (byte)(number1 >> 8);
                 key[0] = (byte)number1;
-                
-                if (number1 == ulong.MaxValue) { number2++; }
+                if (key[0] < byte.MaxValue) { goto NumberIncrease; }
+
+                key[1] = (byte)(number1 >> 8);
+                if (key[1] < byte.MaxValue) { goto NumberIncrease; }
+
+                key[2] = (byte)(number1 >> 16);
+                if (key[2] < byte.MaxValue) { goto NumberIncrease; }
+
+                key[3] = (byte)(number1 >> 24);
+                if (key[3] < byte.MaxValue) { goto NumberIncrease; }
+
+                key[4] = (byte)(number1 >> 32);
+                if (key[4] < byte.MaxValue) { goto NumberIncrease; }
+
+                key[5] = (byte)(number1 >> 40);
+                if (key[5] < byte.MaxValue) { goto NumberIncrease; }
+
+                key[6] = (byte)(number1 >> 48);
+                if (key[6] < byte.MaxValue) { goto NumberIncrease; }
+
+                key[7] = (byte)(number1 >> 56);
+                if (key[7] < byte.MaxValue) { goto NumberIncrease; } else { number2++; }
+
+                key[8] = (byte)number2;
+                if (key[8] < byte.MaxValue) { goto NumberIncrease; }
+
+                key[9] = (byte)(number2 >> 8);
+                if (key[9] < byte.MaxValue) { goto NumberIncrease; }
+
+                key[10] = (byte)(number2 >> 16);
+                if (key[10] < byte.MaxValue) { goto NumberIncrease; }
+
+                key[11] = (byte)(number2 >> 24);
+                if (key[11] < byte.MaxValue) { goto NumberIncrease; }
+
+                key[12] = (byte)(number2 >> 32);
+                if (key[12] < byte.MaxValue) { goto NumberIncrease; }
+
+                key[13] = (byte)(number2 >> 40);
+                if (key[13] < byte.MaxValue) { goto NumberIncrease; }
+
+                key[14] = (byte)(number2 >> 48);
+                if (key[14] < byte.MaxValue) { goto NumberIncrease; }
+
+                key[15] = (byte)(number2 >> 56);
+                //if (key[15] < byte.MaxValue) { goto NumberIncrease; }
+
+                NumberIncrease:
                 number1++;
 
-                aes.Key = key;
-                var decryptor = aes.CreateDecryptor();
-                decryptor.TransformBlock(encryptedData, 0, encryptedData.Length, decryptedData, 0);
+                //aes.Key = key;
+                //var decryptor = aes.CreateDecryptor();
+                //decryptor.TransformBlock(encryptedData, 0, encryptedData.Length, decryptedData, 0);
 
-                if (decryptedData[45] == 'x' && decryptedData[46] == 'x' && decryptedData[47] == 'x')
-                { System.Diagnostics.Debug.WriteLine(System.Text.Encoding.ASCII.GetString(decryptedData)); }
+                //if (decryptedData[45] == 'x' && decryptedData[46] == 'x' && decryptedData[47] == 'x')
+                //{ System.Diagnostics.Debug.WriteLine(System.Text.Encoding.ASCII.GetString(decryptedData)); }
             }
         }
     }
