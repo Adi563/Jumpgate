@@ -29,7 +29,8 @@ namespace Jumpgate.Database.Test
             var toGate = gates.Last(g => g.SectorIn.Id == 2 && g.LeadingTo.Id == 25);
 
             var pathes = new System.Collections.Generic.List<Jumpgate.Database.Path>();
-            
+            var pathesFromTo = new System.Collections.Generic.List<Jumpgate.Database.Path>();
+
             foreach (var gateInSector in fromGate.SectorIn.Gates.Except(new Gate[] { fromGate }))
             {
                 var path = new Path();
@@ -39,9 +40,10 @@ namespace Jumpgate.Database.Test
             }
 
 
-            while (pathes.Count > 1)
+            while (pathes.Any())
             {
                 var pathesCloned = pathes.Select(p => p).ToArray();
+                pathes.Clear();
                 foreach (var path in pathesCloned)
                 {
                     var lastGate = path.Gates.Last();
@@ -59,7 +61,6 @@ namespace Jumpgate.Database.Test
                         if (gateLeadingTo.LeadingTo.Gates.Count == 1 && gateLeadingTo.LeadingTo.Id != toGate.Id)
                         { continue; }
 
-                        
 
                         var newPath = new Path();
                         newPath.Gates.AddRange(path.Gates);
@@ -68,15 +69,16 @@ namespace Jumpgate.Database.Test
                         pathes.Remove(path);
                         pathes.Add(newPath);
 
-                        if (newPath.Gates.Last().Id == toGate.Id)
-                        {
-                            pathes.RemoveAll(p => p.GetDistance() > newPath.GetDistance());
-                        }
+                        if (newPath.Gates.First().Id == fromGate.Id && newPath.Gates.Last().Id == toGate.Id)
+                        { pathesFromTo.Add(newPath); }
                     }
-
-                    //if (!lastGate.LeadingTo.Gates.All(g => path.GetSectors().Contains(g.LeadingTo)))
-                    //{ pathes.Remove(path); }
                 }
+                
+                if (!pathesFromTo.Any())
+                { continue; }
+
+                var pathShortestDistanceFromTo = pathesFromTo.Min(p => p.GetDistance());
+                pathes.RemoveAll(p => p.GetDistance() > pathShortestDistanceFromTo);
             }
         }
     }
