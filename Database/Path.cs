@@ -28,7 +28,7 @@
 
         public override string ToString()
         {
-            return string.Join(" -> ", Gates);
+            return $"{GetDistance()}: {string.Join(" -> ", Gates)}";
         }
     }
 }
