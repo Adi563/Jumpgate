@@ -26,7 +26,7 @@ namespace Jumpgate.Database.Test
             var gates = DatabaseHandler.GetGates();
 
             var fromGate = gates.First(g => g.SectorIn.Id == 1);
-            var toGate = gates.Last(g => g.SectorIn.Id == 100);
+            var toGate = gates.Last(g => g.SectorIn.Id == 2 && g.LeadingTo.Id == 25);
 
             var pathes = new System.Collections.Generic.List<Jumpgate.Database.Path>();
             

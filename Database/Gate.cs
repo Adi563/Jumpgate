@@ -12,12 +12,17 @@
 
         public override string ToString()
         {
-            return string.Format("{0} -> {1}", SectorIn, LeadingTo);
+            return string.Format("{0}({1})", SectorIn, LeadingTo);
         }
 
         public override bool Equals(object obj)
         {
             return Id == ((Gate)obj).Id;
+        }
+
+        public override int GetHashCode()
+        {
+            return Id.GetHashCode();
         }
     }
 }

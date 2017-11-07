@@ -25,5 +25,10 @@
             }
             return distance;
         }
+
+        public override string ToString()
+        {
+            return string.Join(" -> ", Gates);
+        }
     }
 }
