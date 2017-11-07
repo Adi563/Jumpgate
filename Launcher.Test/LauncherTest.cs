@@ -17,7 +17,7 @@ namespace Launcher.Test
 
             using (var stream = new System.IO.FileStream(@"C:\Games\Jumpgate\user.bin", System.IO.FileMode.Create))
             {
-                Launcher.WriteUserFile(stream, userName, password);
+                Logic.WriteUserFile(stream, userName, password);
             }
         }
     }

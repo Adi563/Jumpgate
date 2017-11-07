@@ -9,24 +9,24 @@ namespace Launcher.Gui
         {
             InitializeComponent();
 
-            comboBoxUser.DataSource = new User[]
-            {
-                new User { UserName = "Adi563", Password = "hanswurscht" },
-                new User { UserName = "@Broker01", Password = "NqKuKbE1e" },
-            };
+            var userDataSet = (DataSets.User)userBindingSource.DataSource;
+            if(System.IO.File.Exists("Users.xml"))
+            { userDataSet.ReadXml("Users.xml"); }
         }
 
         private void buttonLaunch_Click(object sender, EventArgs e)
         {
-            var user = (User)comboBoxUser.SelectedItem;
+            var dataRowView = (System.Data.DataRowView)userBindingSource.Current;
+            var userRow = (DataSets.User.UserRow)dataRowView.Row;
+
             using (var stream = new System.IO.FileStream(@"C:\Games\Jumpgate\user.bin", System.IO.FileMode.Create))
             {
-                Launcher.WriteUserFile(stream, user.UserName, user.Password);
+                Logic.WriteUserFile(stream, userRow.Name, userRow.Password);
             }
 
-            using (var stream = new System.IO.FileStream($@"C:\Games\Jumpgate\{user.UserName}.chn", System.IO.FileMode.Create))
+            using (var stream = new System.IO.FileStream($@"C:\Games\Jumpgate\{userRow.Name}.chn", System.IO.FileMode.Create))
             {
-                Launcher.WriteUserChatFile(stream, textBoxChatRoom.Text);
+                Logic.WriteUserChatFile(stream, chatTextBox.Text);
             }
 
             var processStartInfo = new System.Diagnostics.ProcessStartInfo
@@ -51,6 +51,25 @@ namespace Launcher.Gui
             User32.SendMessage(process.MainWindowHandle, 0x200, 0, 0x011A01B6);
             User32.SendMessage(process.MainWindowHandle, 0x201, 0, 0);
             User32.SendMessage(process.MainWindowHandle, 0x202, 0, 0);
+        }
+
+        private void buttonAddUser_Click(object sender, EventArgs e)
+        {
+            userBindingSource.AddNew();
+        }
+
+        private void buttonRemoveUser_Click(object sender, EventArgs e)
+        {
+            if(userBindingSource.Count > 0)
+            { userBindingSource.RemoveCurrent(); }
+        }
+
+        private void buttonSaveUsers_Click(object sender, EventArgs e)
+        {
+            userBindingSource.EndEdit();
+            var userDataSet = (DataSets.User)userBindingSource.DataSource;
+
+            userDataSet.WriteXml("Users.xml");
         }
     }
 }

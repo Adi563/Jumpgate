@@ -1,6 +1,6 @@
 ﻿namespace Launcher
 {
-    public class Launcher
+    public class Logic
     {
         public static void WriteUserFile(System.IO.Stream stream, string userName, string password)
         {

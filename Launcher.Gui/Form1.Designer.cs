@@ -29,39 +29,29 @@
         private void InitializeComponent()
         {
             this.components = new System.ComponentModel.Container();
-            this.labelUserName = new System.Windows.Forms.Label();
-            this.comboBoxUser = new System.Windows.Forms.ComboBox();
+            System.Windows.Forms.Label passwordLabel;
+            System.Windows.Forms.Label chatLabel;
+            System.Windows.Forms.Label nameLabel;
             this.buttonLaunch = new System.Windows.Forms.Button();
-            this.labelPassword = new System.Windows.Forms.Label();
-            this.textBoxPassword = new System.Windows.Forms.TextBox();
-            this.bindingSourceUser = new System.Windows.Forms.BindingSource(this.components);
-            this.textBoxChatRoom = new System.Windows.Forms.TextBox();
-            this.labelChatRoom = new System.Windows.Forms.Label();
             this.checkBoxAutoLogin = new System.Windows.Forms.CheckBox();
-            ((System.ComponentModel.ISupportInitialize)(this.bindingSourceUser)).BeginInit();
+            this.userBindingSource = new System.Windows.Forms.BindingSource(this.components);
+            this.user = new Launcher.Gui.DataSets.User();
+            this.passwordTextBox = new System.Windows.Forms.TextBox();
+            this.chatTextBox = new System.Windows.Forms.TextBox();
+            this.nameComboBox = new System.Windows.Forms.ComboBox();
+            this.buttonAddUser = new System.Windows.Forms.Button();
+            this.buttonRemoveUser = new System.Windows.Forms.Button();
+            this.buttonSaveUsers = new System.Windows.Forms.Button();
+            passwordLabel = new System.Windows.Forms.Label();
+            chatLabel = new System.Windows.Forms.Label();
+            nameLabel = new System.Windows.Forms.Label();
+            ((System.ComponentModel.ISupportInitialize)(this.userBindingSource)).BeginInit();
+            ((System.ComponentModel.ISupportInitialize)(this.user)).BeginInit();
             this.SuspendLayout();
-            // 
-            // labelUserName
-            // 
-            this.labelUserName.AutoSize = true;
-            this.labelUserName.Location = new System.Drawing.Point(12, 9);
-            this.labelUserName.Name = "labelUserName";
-            this.labelUserName.Size = new System.Drawing.Size(55, 13);
-            this.labelUserName.TabIndex = 0;
-            this.labelUserName.Text = "Username";
-            // 
-            // comboBoxUser
-            // 
-            this.comboBoxUser.DisplayMember = "UserName";
-            this.comboBoxUser.FormattingEnabled = true;
-            this.comboBoxUser.Location = new System.Drawing.Point(75, 6);
-            this.comboBoxUser.Name = "comboBoxUser";
-            this.comboBoxUser.Size = new System.Drawing.Size(121, 21);
-            this.comboBoxUser.TabIndex = 1;
             // 
             // buttonLaunch
             // 
-            this.buttonLaunch.Location = new System.Drawing.Point(121, 90);
+            this.buttonLaunch.Location = new System.Drawing.Point(99, 84);
             this.buttonLaunch.Name = "buttonLaunch";
             this.buttonLaunch.Size = new System.Drawing.Size(75, 23);
             this.buttonLaunch.TabIndex = 2;
@@ -69,83 +59,147 @@
             this.buttonLaunch.UseVisualStyleBackColor = true;
             this.buttonLaunch.Click += new System.EventHandler(this.buttonLaunch_Click);
             // 
-            // labelPassword
-            // 
-            this.labelPassword.AutoSize = true;
-            this.labelPassword.Location = new System.Drawing.Point(12, 36);
-            this.labelPassword.Name = "labelPassword";
-            this.labelPassword.Size = new System.Drawing.Size(53, 13);
-            this.labelPassword.TabIndex = 3;
-            this.labelPassword.Text = "Password";
-            // 
-            // textBoxPassword
-            // 
-            this.textBoxPassword.Location = new System.Drawing.Point(75, 33);
-            this.textBoxPassword.Name = "textBoxPassword";
-            this.textBoxPassword.Size = new System.Drawing.Size(121, 20);
-            this.textBoxPassword.TabIndex = 4;
-            // 
-            // textBoxChatRoom
-            // 
-            this.textBoxChatRoom.Location = new System.Drawing.Point(75, 59);
-            this.textBoxChatRoom.Name = "textBoxChatRoom";
-            this.textBoxChatRoom.Size = new System.Drawing.Size(121, 20);
-            this.textBoxChatRoom.TabIndex = 6;
-            this.textBoxChatRoom.Text = "noob";
-            // 
-            // labelChatRoom
-            // 
-            this.labelChatRoom.AutoSize = true;
-            this.labelChatRoom.Location = new System.Drawing.Point(12, 62);
-            this.labelChatRoom.Name = "labelChatRoom";
-            this.labelChatRoom.Size = new System.Drawing.Size(52, 13);
-            this.labelChatRoom.TabIndex = 5;
-            this.labelChatRoom.Text = "Chatroom";
-            // 
             // checkBoxAutoLogin
             // 
             this.checkBoxAutoLogin.AutoSize = true;
             this.checkBoxAutoLogin.Checked = true;
             this.checkBoxAutoLogin.CheckState = System.Windows.Forms.CheckState.Checked;
-            this.checkBoxAutoLogin.Location = new System.Drawing.Point(15, 94);
+            this.checkBoxAutoLogin.Location = new System.Drawing.Point(12, 88);
             this.checkBoxAutoLogin.Name = "checkBoxAutoLogin";
             this.checkBoxAutoLogin.Size = new System.Drawing.Size(77, 17);
             this.checkBoxAutoLogin.TabIndex = 7;
             this.checkBoxAutoLogin.Text = "Auto Login";
             this.checkBoxAutoLogin.UseVisualStyleBackColor = true;
             // 
+            // userBindingSource
+            // 
+            this.userBindingSource.DataMember = "User";
+            this.userBindingSource.DataSource = this.user;
+            // 
+            // user
+            // 
+            this.user.DataSetName = "User";
+            this.user.SchemaSerializationMode = System.Data.SchemaSerializationMode.IncludeSchema;
+            // 
+            // passwordLabel
+            // 
+            passwordLabel.AutoSize = true;
+            passwordLabel.Location = new System.Drawing.Point(12, 35);
+            passwordLabel.Name = "passwordLabel";
+            passwordLabel.Size = new System.Drawing.Size(56, 13);
+            passwordLabel.TabIndex = 9;
+            passwordLabel.Text = "Password:";
+            // 
+            // passwordTextBox
+            // 
+            this.passwordTextBox.DataBindings.Add(new System.Windows.Forms.Binding("Text", this.userBindingSource, "Password", true));
+            this.passwordTextBox.Location = new System.Drawing.Point(74, 32);
+            this.passwordTextBox.Name = "passwordTextBox";
+            this.passwordTextBox.Size = new System.Drawing.Size(100, 20);
+            this.passwordTextBox.TabIndex = 10;
+            // 
+            // chatLabel
+            // 
+            chatLabel.AutoSize = true;
+            chatLabel.Location = new System.Drawing.Point(12, 61);
+            chatLabel.Name = "chatLabel";
+            chatLabel.Size = new System.Drawing.Size(32, 13);
+            chatLabel.TabIndex = 11;
+            chatLabel.Text = "Chat:";
+            // 
+            // chatTextBox
+            // 
+            this.chatTextBox.DataBindings.Add(new System.Windows.Forms.Binding("Text", this.userBindingSource, "Chat", true));
+            this.chatTextBox.Location = new System.Drawing.Point(74, 58);
+            this.chatTextBox.Name = "chatTextBox";
+            this.chatTextBox.Size = new System.Drawing.Size(100, 20);
+            this.chatTextBox.TabIndex = 12;
+            // 
+            // nameLabel
+            // 
+            nameLabel.AutoSize = true;
+            nameLabel.Location = new System.Drawing.Point(12, 9);
+            nameLabel.Name = "nameLabel";
+            nameLabel.Size = new System.Drawing.Size(38, 13);
+            nameLabel.TabIndex = 12;
+            nameLabel.Text = "Name:";
+            // 
+            // nameComboBox
+            // 
+            this.nameComboBox.DataSource = this.userBindingSource;
+            this.nameComboBox.DisplayMember = "Name";
+            this.nameComboBox.FormattingEnabled = true;
+            this.nameComboBox.Location = new System.Drawing.Point(74, 6);
+            this.nameComboBox.Name = "nameComboBox";
+            this.nameComboBox.Size = new System.Drawing.Size(100, 21);
+            this.nameComboBox.TabIndex = 13;
+            // 
+            // buttonAddUser
+            // 
+            this.buttonAddUser.Location = new System.Drawing.Point(180, 6);
+            this.buttonAddUser.Name = "buttonAddUser";
+            this.buttonAddUser.Size = new System.Drawing.Size(22, 23);
+            this.buttonAddUser.TabIndex = 14;
+            this.buttonAddUser.Text = "+";
+            this.buttonAddUser.UseVisualStyleBackColor = true;
+            this.buttonAddUser.Click += new System.EventHandler(this.buttonAddUser_Click);
+            // 
+            // buttonRemoveUser
+            // 
+            this.buttonRemoveUser.Location = new System.Drawing.Point(208, 6);
+            this.buttonRemoveUser.Name = "buttonRemoveUser";
+            this.buttonRemoveUser.Size = new System.Drawing.Size(22, 23);
+            this.buttonRemoveUser.TabIndex = 15;
+            this.buttonRemoveUser.Text = "-";
+            this.buttonRemoveUser.UseVisualStyleBackColor = true;
+            this.buttonRemoveUser.Click += new System.EventHandler(this.buttonRemoveUser_Click);
+            // 
+            // buttonSaveUsers
+            // 
+            this.buttonSaveUsers.Location = new System.Drawing.Point(180, 30);
+            this.buttonSaveUsers.Name = "buttonSaveUsers";
+            this.buttonSaveUsers.Size = new System.Drawing.Size(50, 23);
+            this.buttonSaveUsers.TabIndex = 16;
+            this.buttonSaveUsers.Text = "Save";
+            this.buttonSaveUsers.UseVisualStyleBackColor = true;
+            this.buttonSaveUsers.Click += new System.EventHandler(this.buttonSaveUsers_Click);
+            // 
             // Form1
             // 
             this.AutoScaleDimensions = new System.Drawing.SizeF(6F, 13F);
             this.AutoScaleMode = System.Windows.Forms.AutoScaleMode.Font;
-            this.ClientSize = new System.Drawing.Size(204, 125);
+            this.ClientSize = new System.Drawing.Size(236, 116);
+            this.Controls.Add(this.buttonSaveUsers);
+            this.Controls.Add(this.buttonRemoveUser);
+            this.Controls.Add(this.buttonAddUser);
+            this.Controls.Add(nameLabel);
+            this.Controls.Add(this.nameComboBox);
+            this.Controls.Add(passwordLabel);
+            this.Controls.Add(this.passwordTextBox);
+            this.Controls.Add(chatLabel);
+            this.Controls.Add(this.chatTextBox);
             this.Controls.Add(this.checkBoxAutoLogin);
-            this.Controls.Add(this.textBoxChatRoom);
-            this.Controls.Add(this.labelChatRoom);
-            this.Controls.Add(this.textBoxPassword);
-            this.Controls.Add(this.labelPassword);
             this.Controls.Add(this.buttonLaunch);
-            this.Controls.Add(this.comboBoxUser);
-            this.Controls.Add(this.labelUserName);
             this.Name = "Form1";
             this.Text = "Jumpgate Launcher";
-            ((System.ComponentModel.ISupportInitialize)(this.bindingSourceUser)).EndInit();
+            ((System.ComponentModel.ISupportInitialize)(this.userBindingSource)).EndInit();
+            ((System.ComponentModel.ISupportInitialize)(this.user)).EndInit();
             this.ResumeLayout(false);
             this.PerformLayout();
 
         }
 
         #endregion
-
-        private System.Windows.Forms.Label labelUserName;
-        private System.Windows.Forms.ComboBox comboBoxUser;
         private System.Windows.Forms.Button buttonLaunch;
-        private System.Windows.Forms.Label labelPassword;
-        private System.Windows.Forms.TextBox textBoxPassword;
-        private System.Windows.Forms.BindingSource bindingSourceUser;
-        private System.Windows.Forms.TextBox textBoxChatRoom;
-        private System.Windows.Forms.Label labelChatRoom;
         private System.Windows.Forms.CheckBox checkBoxAutoLogin;
+        private DataSets.User user;
+        private System.Windows.Forms.BindingSource userBindingSource;
+        private System.Windows.Forms.TextBox passwordTextBox;
+        private System.Windows.Forms.TextBox chatTextBox;
+        private System.Windows.Forms.ComboBox nameComboBox;
+        private System.Windows.Forms.Button buttonAddUser;
+        private System.Windows.Forms.Button buttonRemoveUser;
+        private System.Windows.Forms.Button buttonSaveUsers;
     }
 }
 
