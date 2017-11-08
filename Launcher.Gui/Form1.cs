@@ -36,11 +36,21 @@ namespace Launcher.Gui
                 WorkingDirectory = @"C:\Games\Jumpgate\",
                 UseShellExecute = false
             };
+
             var process = System.Diagnostics.Process.Start(processStartInfo);
-
+            
             if (!checkBoxAutoLogin.Checked) { return; }
-
-            System.Threading.Thread.Sleep(7000);
+            
+            // Capture screen and check if OK button appeared
+            var bitmap = new System.Drawing.Bitmap(382-320, 343-320);
+            var graphics = System.Drawing.Graphics.FromImage(bitmap);
+            var color = System.Drawing.Color.Black;
+            while ( !(color.R == 22 && color.G == 54 && color.B == 22))
+            {
+                graphics.CopyFromScreen(320, 320, 0, 0, new System.Drawing.Size(bitmap.Width, bitmap.Height), System.Drawing.CopyPixelOperation.SourceCopy);
+                color = bitmap.GetPixel(10, 10);
+                System.Threading.Thread.Sleep(500);
+            }
 
             // Click connect
             User32.SendMessage(process.MainWindowHandle, 0x200, 0, 0x014B015F);
