@@ -32,29 +32,59 @@
             System.Windows.Forms.Label passwordLabel;
             System.Windows.Forms.Label chatLabel;
             System.Windows.Forms.Label nameLabel;
+            System.Windows.Forms.Label labelUser;
             this.buttonLaunch = new System.Windows.Forms.Button();
             this.checkBoxAutoLogin = new System.Windows.Forms.CheckBox();
             this.userBindingSource = new System.Windows.Forms.BindingSource(this.components);
             this.user = new Launcher.Gui.DataSets.User();
             this.passwordTextBox = new System.Windows.Forms.TextBox();
             this.chatTextBox = new System.Windows.Forms.TextBox();
-            this.nameComboBox = new System.Windows.Forms.ComboBox();
             this.buttonAddUser = new System.Windows.Forms.Button();
             this.buttonRemoveUser = new System.Windows.Forms.Button();
             this.buttonSaveUsers = new System.Windows.Forms.Button();
+            this.comboBox1 = new System.Windows.Forms.ComboBox();
+            this.textBoxName = new System.Windows.Forms.TextBox();
             passwordLabel = new System.Windows.Forms.Label();
             chatLabel = new System.Windows.Forms.Label();
             nameLabel = new System.Windows.Forms.Label();
+            labelUser = new System.Windows.Forms.Label();
             ((System.ComponentModel.ISupportInitialize)(this.userBindingSource)).BeginInit();
             ((System.ComponentModel.ISupportInitialize)(this.user)).BeginInit();
             this.SuspendLayout();
             // 
+            // passwordLabel
+            // 
+            passwordLabel.AutoSize = true;
+            passwordLabel.Location = new System.Drawing.Point(10, 67);
+            passwordLabel.Name = "passwordLabel";
+            passwordLabel.Size = new System.Drawing.Size(56, 13);
+            passwordLabel.TabIndex = 9;
+            passwordLabel.Text = "Password:";
+            // 
+            // chatLabel
+            // 
+            chatLabel.AutoSize = true;
+            chatLabel.Location = new System.Drawing.Point(10, 93);
+            chatLabel.Name = "chatLabel";
+            chatLabel.Size = new System.Drawing.Size(32, 13);
+            chatLabel.TabIndex = 11;
+            chatLabel.Text = "Chat:";
+            // 
+            // nameLabel
+            // 
+            nameLabel.AutoSize = true;
+            nameLabel.Location = new System.Drawing.Point(10, 41);
+            nameLabel.Name = "nameLabel";
+            nameLabel.Size = new System.Drawing.Size(38, 13);
+            nameLabel.TabIndex = 12;
+            nameLabel.Text = "Name:";
+            // 
             // buttonLaunch
             // 
-            this.buttonLaunch.Location = new System.Drawing.Point(99, 84);
+            this.buttonLaunch.Location = new System.Drawing.Point(97, 116);
             this.buttonLaunch.Name = "buttonLaunch";
             this.buttonLaunch.Size = new System.Drawing.Size(75, 23);
-            this.buttonLaunch.TabIndex = 2;
+            this.buttonLaunch.TabIndex = 5;
             this.buttonLaunch.Text = "Launch";
             this.buttonLaunch.UseVisualStyleBackColor = true;
             this.buttonLaunch.Click += new System.EventHandler(this.buttonLaunch_Click);
@@ -64,10 +94,10 @@
             this.checkBoxAutoLogin.AutoSize = true;
             this.checkBoxAutoLogin.Checked = true;
             this.checkBoxAutoLogin.CheckState = System.Windows.Forms.CheckState.Checked;
-            this.checkBoxAutoLogin.Location = new System.Drawing.Point(12, 88);
+            this.checkBoxAutoLogin.Location = new System.Drawing.Point(10, 120);
             this.checkBoxAutoLogin.Name = "checkBoxAutoLogin";
             this.checkBoxAutoLogin.Size = new System.Drawing.Size(77, 17);
-            this.checkBoxAutoLogin.TabIndex = 7;
+            this.checkBoxAutoLogin.TabIndex = 4;
             this.checkBoxAutoLogin.Text = "Auto Login";
             this.checkBoxAutoLogin.UseVisualStyleBackColor = true;
             // 
@@ -81,99 +111,93 @@
             this.user.DataSetName = "User";
             this.user.SchemaSerializationMode = System.Data.SchemaSerializationMode.IncludeSchema;
             // 
-            // passwordLabel
-            // 
-            passwordLabel.AutoSize = true;
-            passwordLabel.Location = new System.Drawing.Point(12, 35);
-            passwordLabel.Name = "passwordLabel";
-            passwordLabel.Size = new System.Drawing.Size(56, 13);
-            passwordLabel.TabIndex = 9;
-            passwordLabel.Text = "Password:";
-            // 
             // passwordTextBox
             // 
             this.passwordTextBox.DataBindings.Add(new System.Windows.Forms.Binding("Text", this.userBindingSource, "Password", true));
-            this.passwordTextBox.Location = new System.Drawing.Point(74, 32);
+            this.passwordTextBox.Location = new System.Drawing.Point(72, 64);
             this.passwordTextBox.Name = "passwordTextBox";
             this.passwordTextBox.Size = new System.Drawing.Size(100, 20);
-            this.passwordTextBox.TabIndex = 10;
-            // 
-            // chatLabel
-            // 
-            chatLabel.AutoSize = true;
-            chatLabel.Location = new System.Drawing.Point(12, 61);
-            chatLabel.Name = "chatLabel";
-            chatLabel.Size = new System.Drawing.Size(32, 13);
-            chatLabel.TabIndex = 11;
-            chatLabel.Text = "Chat:";
+            this.passwordTextBox.TabIndex = 2;
             // 
             // chatTextBox
             // 
             this.chatTextBox.DataBindings.Add(new System.Windows.Forms.Binding("Text", this.userBindingSource, "Chat", true));
-            this.chatTextBox.Location = new System.Drawing.Point(74, 58);
+            this.chatTextBox.Location = new System.Drawing.Point(72, 90);
             this.chatTextBox.Name = "chatTextBox";
             this.chatTextBox.Size = new System.Drawing.Size(100, 20);
-            this.chatTextBox.TabIndex = 12;
-            // 
-            // nameLabel
-            // 
-            nameLabel.AutoSize = true;
-            nameLabel.Location = new System.Drawing.Point(12, 9);
-            nameLabel.Name = "nameLabel";
-            nameLabel.Size = new System.Drawing.Size(38, 13);
-            nameLabel.TabIndex = 12;
-            nameLabel.Text = "Name:";
-            // 
-            // nameComboBox
-            // 
-            this.nameComboBox.DataSource = this.userBindingSource;
-            this.nameComboBox.DisplayMember = "Name";
-            this.nameComboBox.FormattingEnabled = true;
-            this.nameComboBox.Location = new System.Drawing.Point(74, 6);
-            this.nameComboBox.Name = "nameComboBox";
-            this.nameComboBox.Size = new System.Drawing.Size(100, 21);
-            this.nameComboBox.TabIndex = 13;
+            this.chatTextBox.TabIndex = 3;
             // 
             // buttonAddUser
             // 
-            this.buttonAddUser.Location = new System.Drawing.Point(180, 6);
+            this.buttonAddUser.Location = new System.Drawing.Point(178, 11);
             this.buttonAddUser.Name = "buttonAddUser";
             this.buttonAddUser.Size = new System.Drawing.Size(22, 23);
-            this.buttonAddUser.TabIndex = 14;
+            this.buttonAddUser.TabIndex = 6;
             this.buttonAddUser.Text = "+";
             this.buttonAddUser.UseVisualStyleBackColor = true;
             this.buttonAddUser.Click += new System.EventHandler(this.buttonAddUser_Click);
             // 
             // buttonRemoveUser
             // 
-            this.buttonRemoveUser.Location = new System.Drawing.Point(208, 6);
+            this.buttonRemoveUser.Location = new System.Drawing.Point(206, 11);
             this.buttonRemoveUser.Name = "buttonRemoveUser";
             this.buttonRemoveUser.Size = new System.Drawing.Size(22, 23);
-            this.buttonRemoveUser.TabIndex = 15;
+            this.buttonRemoveUser.TabIndex = 7;
             this.buttonRemoveUser.Text = "-";
             this.buttonRemoveUser.UseVisualStyleBackColor = true;
             this.buttonRemoveUser.Click += new System.EventHandler(this.buttonRemoveUser_Click);
             // 
             // buttonSaveUsers
             // 
-            this.buttonSaveUsers.Location = new System.Drawing.Point(180, 30);
+            this.buttonSaveUsers.Location = new System.Drawing.Point(178, 35);
             this.buttonSaveUsers.Name = "buttonSaveUsers";
             this.buttonSaveUsers.Size = new System.Drawing.Size(50, 23);
-            this.buttonSaveUsers.TabIndex = 16;
+            this.buttonSaveUsers.TabIndex = 8;
             this.buttonSaveUsers.Text = "Save";
             this.buttonSaveUsers.UseVisualStyleBackColor = true;
             this.buttonSaveUsers.Click += new System.EventHandler(this.buttonSaveUsers_Click);
+            // 
+            // labelUser
+            // 
+            labelUser.AutoSize = true;
+            labelUser.Location = new System.Drawing.Point(10, 14);
+            labelUser.Name = "labelUser";
+            labelUser.Size = new System.Drawing.Size(32, 13);
+            labelUser.TabIndex = 14;
+            labelUser.Text = "User:";
+            // 
+            // comboBox1
+            // 
+            this.comboBox1.AutoCompleteMode = System.Windows.Forms.AutoCompleteMode.Suggest;
+            this.comboBox1.DataSource = this.userBindingSource;
+            this.comboBox1.DisplayMember = "Name";
+            this.comboBox1.FormattingEnabled = true;
+            this.comboBox1.Location = new System.Drawing.Point(72, 11);
+            this.comboBox1.Name = "comboBox1";
+            this.comboBox1.Size = new System.Drawing.Size(100, 21);
+            this.comboBox1.TabIndex = 13;
+            this.comboBox1.ValueMember = "Name";
+            // 
+            // textBoxName
+            // 
+            this.textBoxName.DataBindings.Add(new System.Windows.Forms.Binding("Text", this.userBindingSource, "Name", true));
+            this.textBoxName.Location = new System.Drawing.Point(72, 38);
+            this.textBoxName.Name = "textBoxName";
+            this.textBoxName.Size = new System.Drawing.Size(100, 20);
+            this.textBoxName.TabIndex = 15;
             // 
             // Form1
             // 
             this.AutoScaleDimensions = new System.Drawing.SizeF(6F, 13F);
             this.AutoScaleMode = System.Windows.Forms.AutoScaleMode.Font;
-            this.ClientSize = new System.Drawing.Size(236, 116);
+            this.ClientSize = new System.Drawing.Size(236, 146);
+            this.Controls.Add(this.textBoxName);
+            this.Controls.Add(labelUser);
+            this.Controls.Add(this.comboBox1);
             this.Controls.Add(this.buttonSaveUsers);
             this.Controls.Add(this.buttonRemoveUser);
             this.Controls.Add(this.buttonAddUser);
             this.Controls.Add(nameLabel);
-            this.Controls.Add(this.nameComboBox);
             this.Controls.Add(passwordLabel);
             this.Controls.Add(this.passwordTextBox);
             this.Controls.Add(chatLabel);
@@ -196,10 +220,11 @@
         private System.Windows.Forms.BindingSource userBindingSource;
         private System.Windows.Forms.TextBox passwordTextBox;
         private System.Windows.Forms.TextBox chatTextBox;
-        private System.Windows.Forms.ComboBox nameComboBox;
         private System.Windows.Forms.Button buttonAddUser;
         private System.Windows.Forms.Button buttonRemoveUser;
         private System.Windows.Forms.Button buttonSaveUsers;
+        private System.Windows.Forms.ComboBox comboBox1;
+        private System.Windows.Forms.TextBox textBoxName;
     }
 }
 
