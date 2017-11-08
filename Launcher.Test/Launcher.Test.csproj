@@ -53,6 +53,12 @@
     <Compile Include="LauncherTest.cs" />
     <Compile Include="Properties\AssemblyInfo.cs" />
   </ItemGroup>
+  <ItemGroup>
+    <ProjectReference Include="..\Launcher.Gui\Launcher.Gui.csproj">
+      <Project>{1d451c30-a736-46e6-81e7-c6f501eb5b64}</Project>
+      <Name>Launcher.Gui</Name>
+    </ProjectReference>
+  </ItemGroup>
   <Choose>
     <When Condition="'$(VisualStudioVersion)' == '10.0' And '$(IsCodedUITest)' == 'True'">
       <ItemGroup>
