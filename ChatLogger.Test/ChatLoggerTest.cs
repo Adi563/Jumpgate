@@ -7,13 +7,36 @@ namespace ChatLogger.Test
     public class ChatLoggerTest
     {
         [TestMethod]
-        public void TestMethod1()
+        public void OcrWebserviceTest()
+        {
+            byte[] imageData;
+            using (var stream = new System.IO.MemoryStream())
+            {
+                Properties.Resources.screen.Save(stream, System.Drawing.Imaging.ImageFormat.Jpeg);
+                imageData = stream.ToArray();
+            }
+
+            var ocrWebServiceClient = new OcrWebService.OCRWebServiceSoapClient("OCRWebServiceSoap");
+            var ocrImageData = new OcrWebService.OCRWSInputImage { fileName = "screen.jpg", fileData = imageData };
+            var ocrSettings = new OcrWebService.OCRWSSettings
+            {
+                ocrLanguages = new OcrWebService.OCRWS_Language[] { OcrWebService.OCRWS_Language.ENGLISH },
+                outputDocumentFormat = OcrWebService.OCRWS_OutputFormat.TXT,
+                createOutputDocument = true
+            };
+
+            var response = ocrWebServiceClient.OCRWebServiceRecognize("hanswurscht", "8F799807-CC64-4138-BF24-A795E5993D18", ocrImageData, ocrSettings);
+        }
+
+
+        [TestMethod]
+        public void ScreenCaptureTest()
         {
             var bitmapOld = new System.Drawing.Bitmap(374, 66);
             var graphicsOld = System.Drawing.Graphics.FromImage(bitmapOld);
             var bitmapNew = new System.Drawing.Bitmap(374, 66);
             var graphicsNew = System.Drawing.Graphics.FromImage(bitmapNew);
-
+            
             while (true)
             {
                 graphicsNew.CopyFromScreen(80, 30, 0, 0, new System.Drawing.Size(bitmapNew.Width, bitmapNew.Height), System.Drawing.CopyPixelOperation.SourceCopy);
