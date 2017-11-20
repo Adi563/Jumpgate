@@ -9,8 +9,7 @@
             var bufferUserName = System.Text.Encoding.ASCII.GetBytes(userName);
             var bufferPassword = System.Text.Encoding.ASCII.GetBytes(password);
 
-            System.Array.Copy(bufferUserName, 0, buffer, 0, System.Math.Min(bufferUserName.Length, 7));
-            System.Array.Copy(new byte[] { 0x30, 0x31 }, 0, buffer, 7, 2);
+            System.Array.Copy(bufferUserName, 0, buffer, 0, System.Math.Min(bufferUserName.Length, 10));
             System.Array.Copy(bufferPassword, 0, buffer, 11, System.Math.Min(bufferPassword.Length, 9));
 
             stream.Write(buffer, 0, buffer.Length);
