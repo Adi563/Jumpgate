@@ -26,6 +26,7 @@
             var itemsGroupedByStations = itemsCommodities.GroupBy(i => i.StationName);
 
             var currentStation = "Solrain Wake";
+            ushort cargoSpace = 500;
 
             var itemsForCurrentStation = itemsGroupedByStations.First(ig => ig.Key.Equals(currentStation));
             var itemsForOtherStations = itemsGroupedByStations.Where(ig => !ig.Key.Equals(currentStation)).SelectMany(i => i);
@@ -34,8 +35,15 @@
             {
                 var itemForCurrentStation = itemsForCurrentStation.First(i => i.Id == itemForOtherStation.Id);
                 
-                return (int)itemForOtherStation.Price - (int)itemForCurrentStation.Price;
-            } );
+                return Math.Min(itemForCurrentStation.Amount, cargoSpace) * ((int)itemForOtherStation.Price - (int)itemForCurrentStation.Price);
+            });
+
+            foreach (var itemForOtherStation in itemsOrderedByPriceDifference)
+            {
+                var itemForCurrentStation = itemsForCurrentStation.First(i => i.Id == itemForOtherStation.Id);
+
+                System.Diagnostics.Debug.WriteLine($"Item: {itemForCurrentStation.Name} ({itemForCurrentStation.Amount}) -> {itemForOtherStation.StationName} - Difference: {(int)itemForOtherStation.Price - (int)itemForCurrentStation.Price} - Profit: {Math.Min(itemForCurrentStation.Amount, cargoSpace) * ((int)itemForOtherStation.Price - (int)itemForCurrentStation.Price)}");
+            }
         }
     }
 }
