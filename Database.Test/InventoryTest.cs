@@ -10,8 +10,10 @@
         [TestMethod]
         public void GetInventory()
         {
-            var jsonData =  new System.Net.WebClient().DownloadData("http://jumpgate-tri.org/jossh-api/stations-inventory.json");
-
+            //var jsonData =  new System.Net.WebClient().DownloadData("http://jumpgate-tri.org/jossh-api/stations-inventory.json");
+            var streamJson = this.GetType().Assembly.GetManifestResourceStream("Database.Test.stations-inventory.json");
+            var jsonData = new byte[streamJson.Length];
+            streamJson.Read(jsonData, 0, jsonData.Length);
             Item[] items;
 
             var serializer = new System.Runtime.Serialization.Json.DataContractJsonSerializer(typeof(Database.Item[]));
@@ -24,20 +26,16 @@
             var itemsGroupedByStations = itemsCommodities.GroupBy(i => i.StationName);
 
             var currentStation = "Solrain Wake";
-            var itemsForCurrentStation = itemsGroupedByStations.First(ig => ig.Key.Equals(currentStation));
 
-            Item itemBest = null;
-            int differenceBest = 0;
-            foreach (var itemForCurrentStation in itemsForCurrentStation)
+            var itemsForCurrentStation = itemsGroupedByStations.First(ig => ig.Key.Equals(currentStation));
+            var itemsForOtherStations = itemsGroupedByStations.Where(ig => !ig.Key.Equals(currentStation)).SelectMany(i => i);
+
+            var itemsOrderedByPriceDifference = itemsForOtherStations.OrderByDescending(itemForOtherStation =>
             {
-                var itemsForOtherStation = itemsCommodities.Where(i => !i.StationName.Equals(currentStation) && i.Id == itemForCurrentStation.Id);
+                var itemForCurrentStation = itemsForCurrentStation.First(i => i.Id == itemForOtherStation.Id);
                 
-                var itemWithBestDifference = itemsForOtherStation.OrderByDescending(i => (int)i.Price - (int)itemForCurrentStation.Price).First();
-                
-                if ((int)itemWithBestDifference.Price - (int)itemForCurrentStation.Price < differenceBest) { continue; }
-                itemBest = itemWithBestDifference;
-                differenceBest = (int)itemWithBestDifference.Price - (int)itemForCurrentStation.Price;
-            }
+                return (int)itemForOtherStation.Price - (int)itemForCurrentStation.Price;
+            } );
         }
     }
 }
