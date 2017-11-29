@@ -27,12 +27,13 @@
 
             ushort cargoSpace = 500;
             decimal taxRate = 1.0088836385115180153573538098051m;
+            decimal taxRateRounded = Math.Round(taxRate, 4);
 
-            var itemsForCurrentStation = itemsCommodities;
+            var itemsForCurrentStation = itemsCommodities.Where(i => i.StationName.Equals("Solrain Wake"));
             var itemsForOtherStations = itemsCommodities;
 
             var deliveries = itemsForCurrentStation.SelectMany(
-                itemForCurrentStation => itemsForOtherStations.Where(itemForOtherStation => itemForCurrentStation.Id == itemForOtherStation.Id && !itemForCurrentStation.StationName.Equals(itemForOtherStation.StationName)).Select(itemForOtherStation => new Delivery(itemForCurrentStation, itemForOtherStation, Math.Min(cargoSpace, itemForCurrentStation.Amount), taxRate)));
+                itemForCurrentStation => itemsForOtherStations.Where(itemForOtherStation => itemForCurrentStation.Id == itemForOtherStation.Id && !itemForCurrentStation.StationName.Equals(itemForOtherStation.StationName)).Select(itemForOtherStation => new Delivery(itemForCurrentStation, itemForOtherStation, Math.Min(cargoSpace, itemForCurrentStation.Amount), taxRateRounded)));
 
             var deliveriesOrderedByPrice = deliveries.OrderByDescending(delivery => delivery.Profit);
 

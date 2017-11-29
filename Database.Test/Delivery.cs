@@ -15,7 +15,7 @@
         public uint Amount { get; set; }
         public decimal TaxRate { get; set; }
 
-        public decimal DifferencePerItem { get { return To.Price - From.Price * TaxRate; } }
+        public int DifferencePerItem { get { return (int)To.Price - (int)(From.Price * TaxRate); } }
 
         public long Profit { get { return (long)(DifferencePerItem) * Amount; } }
     }
