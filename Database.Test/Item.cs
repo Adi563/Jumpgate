@@ -1,4 +1,4 @@
-﻿namespace Jumpgate.Database
+﻿namespace Jumpgate.Database.Test
 {
     [System.Runtime.Serialization.DataContract]
     public class Item

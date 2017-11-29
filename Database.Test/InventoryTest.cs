@@ -16,7 +16,7 @@
             streamJson.Read(jsonData, 0, jsonData.Length);
             Item[] items;
 
-            var serializer = new System.Runtime.Serialization.Json.DataContractJsonSerializer(typeof(Database.Item[]));
+            var serializer = new System.Runtime.Serialization.Json.DataContractJsonSerializer(typeof(Jumpgate.Database.Test.Item[]));
             using (var stream = new System.IO.MemoryStream(jsonData))
             {
                 items = (Item[])serializer.ReadObject(stream);
@@ -25,24 +25,19 @@
             var itemsCommodities = items.Where(i => i.GroupName.Equals("Commodities"));
             var itemsGroupedByStations = itemsCommodities.GroupBy(i => i.StationName);
 
-            var currentStation = "Solrain Wake";
             ushort cargoSpace = 500;
 
-            var itemsForCurrentStation = itemsGroupedByStations.First(ig => ig.Key.Equals(currentStation));
-            var itemsForOtherStations = itemsGroupedByStations.Where(ig => !ig.Key.Equals(currentStation)).SelectMany(i => i);
+            var itemsForCurrentStation = itemsCommodities;
+            var itemsForOtherStations = itemsCommodities;
 
-            var itemsOrderedByPriceDifference = itemsForOtherStations.OrderByDescending(itemForOtherStation =>
+            var deliveries = itemsForCurrentStation.SelectMany(
+                itemForCurrentStation => itemsForOtherStations.Where(itemForOtherStation => itemForCurrentStation.Id == itemForOtherStation.Id && !itemForCurrentStation.StationName.Equals(itemForOtherStation.StationName)).Select(itemForOtherStation => new Delivery(itemForCurrentStation, itemForOtherStation, Math.Min(cargoSpace, itemForCurrentStation.Amount))));
+
+            var deliveriesOrderedByPrice = deliveries.OrderByDescending(delivery => delivery.Profit);
+
+            foreach (var delivery in deliveriesOrderedByPrice)
             {
-                var itemForCurrentStation = itemsForCurrentStation.First(i => i.Id == itemForOtherStation.Id);
-                
-                return Math.Min(itemForCurrentStation.Amount, cargoSpace) * ((int)itemForOtherStation.Price - (int)itemForCurrentStation.Price);
-            });
-
-            foreach (var itemForOtherStation in itemsOrderedByPriceDifference)
-            {
-                var itemForCurrentStation = itemsForCurrentStation.First(i => i.Id == itemForOtherStation.Id);
-
-                System.Diagnostics.Debug.WriteLine($"Item: {itemForCurrentStation.Name} ({itemForCurrentStation.Amount}) -> {itemForOtherStation.StationName} - Difference: {(int)itemForOtherStation.Price - (int)itemForCurrentStation.Price} - Profit: {Math.Min(itemForCurrentStation.Amount, cargoSpace) * ((int)itemForOtherStation.Price - (int)itemForCurrentStation.Price)}");
+                System.Diagnostics.Debug.WriteLine($"Item: {delivery.To.Name} ({delivery.Amount}) ({delivery.From.StationName} -> {delivery.To.StationName}) - Profit: {delivery.Profit}");
             }
         }
     }

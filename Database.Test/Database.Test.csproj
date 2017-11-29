@@ -52,6 +52,7 @@
     </Otherwise>
   </Choose>
   <ItemGroup>
+    <Compile Include="Delivery.cs" />
     <Compile Include="InventoryTest.cs" />
     <Compile Include="DatabaseTest.cs" />
     <Compile Include="Item.cs" />
