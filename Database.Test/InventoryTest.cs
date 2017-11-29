@@ -26,12 +26,13 @@
             var itemsGroupedByStations = itemsCommodities.GroupBy(i => i.StationName);
 
             ushort cargoSpace = 500;
+            decimal taxRate = 1.0088836385115180153573538098051m;
 
             var itemsForCurrentStation = itemsCommodities;
             var itemsForOtherStations = itemsCommodities;
 
             var deliveries = itemsForCurrentStation.SelectMany(
-                itemForCurrentStation => itemsForOtherStations.Where(itemForOtherStation => itemForCurrentStation.Id == itemForOtherStation.Id && !itemForCurrentStation.StationName.Equals(itemForOtherStation.StationName)).Select(itemForOtherStation => new Delivery(itemForCurrentStation, itemForOtherStation, Math.Min(cargoSpace, itemForCurrentStation.Amount))));
+                itemForCurrentStation => itemsForOtherStations.Where(itemForOtherStation => itemForCurrentStation.Id == itemForOtherStation.Id && !itemForCurrentStation.StationName.Equals(itemForOtherStation.StationName)).Select(itemForOtherStation => new Delivery(itemForCurrentStation, itemForOtherStation, Math.Min(cargoSpace, itemForCurrentStation.Amount), taxRate)));
 
             var deliveriesOrderedByPrice = deliveries.OrderByDescending(delivery => delivery.Profit);
 
