@@ -21,6 +21,24 @@ namespace Jumpgate.Database.Test
         }
 
         [TestMethod]
+        public void GetGroupsTest()
+        {
+            var groups = Jumpgate.Database.DatabaseHandler.GetGroups();
+        }
+
+        [TestMethod]
+        public void GetItems()
+        {
+            var items = Jumpgate.Database.DatabaseHandler.GetItems();
+        }
+
+        [TestMethod]
+        public void GetItemStocks()
+        {
+            var itemStocks = Jumpgate.Database.DatabaseHandler.GetItemStocks();
+        }
+
+        [TestMethod]
         public void FindShortestPath()
         {
             var gates = DatabaseHandler.GetGates();

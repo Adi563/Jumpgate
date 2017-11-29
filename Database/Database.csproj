@@ -41,7 +41,10 @@
   </ItemGroup>
   <ItemGroup>
     <Compile Include="DatabaseHandler.cs" />
+    <Compile Include="ItemStock.cs" />
+    <Compile Include="Group.cs" />
     <Compile Include="Gate.cs" />
+    <Compile Include="Item.cs" />
     <Compile Include="Path.cs" />
     <Compile Include="Properties\AssemblyInfo.cs" />
     <Compile Include="Schema\Jumpgate.cs">
@@ -50,7 +53,9 @@
     <Compile Include="Sector.cs" />
   </ItemGroup>
   <ItemGroup>
-    <EmbeddedResource Include="Database.xml" />
+    <EmbeddedResource Include="Database.xml">
+      <SubType>Designer</SubType>
+    </EmbeddedResource>
   </ItemGroup>
   <ItemGroup>
     <None Include="Schema\Jumpgate.xsd">

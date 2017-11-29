@@ -1,5 +1,30 @@
 <?xml version="1.0" encoding="UTF-8"?>
 <xs:schema attributeFormDefault="unqualified" elementFormDefault="qualified" xmlns:xs="http://www.w3.org/2001/XMLSchema" version="1.0.0">
+
+  <xs:complexType name="ItemStock">
+    <xs:sequence>
+      <xs:element type="xs:unsignedInt" name="ItemId" minOccurs="1" maxOccurs="1" />
+      <xs:element type="xs:string" name="StationName" minOccurs="1" maxOccurs="1" />
+      <xs:element type="xs:unsignedInt" name="BasePrice" minOccurs="1" maxOccurs="1" />
+      <xs:element type="xs:unsignedInt" name="Amount" minOccurs="1" maxOccurs="1" />
+    </xs:sequence>
+  </xs:complexType>
+  
+  <xs:complexType name="Group">
+    <xs:sequence>
+      <xs:element type="xs:unsignedInt" name="GroupId" minOccurs="1" maxOccurs="1" />
+      <xs:element type="xs:string" name="Name" minOccurs="1" maxOccurs="1" />
+    </xs:sequence>
+  </xs:complexType>
+  
+  <xs:complexType name="Item">
+    <xs:sequence>
+      <xs:element type="xs:unsignedInt" name="GroupId" minOccurs="1" maxOccurs="1" />
+      <xs:element type="xs:unsignedInt" name="ItemId" minOccurs="1" maxOccurs="1" />
+      <xs:element type="xs:string" name="Name" minOccurs="1" maxOccurs="1" />
+    </xs:sequence>
+  </xs:complexType>
+  
 	<xs:complexType name="Sector">
 		<xs:sequence>
 			<xs:element type="xs:unsignedInt" name="SectorId" minOccurs="1" maxOccurs="1" />
@@ -22,6 +47,9 @@
 			<xs:sequence>
 				<xs:element type="Sector" name="Sectors" minOccurs="0" maxOccurs="unbounded" />
 				<xs:element type="Gate" name="Gates" minOccurs="0" maxOccurs="unbounded" />
+        <xs:element type="Group" name="Groups" minOccurs="0" maxOccurs="unbounded" />
+        <xs:element type="Item" name="Items" minOccurs="0" maxOccurs="unbounded" />
+        <xs:element type="ItemStock" name="ItemStocks" minOccurs="0" maxOccurs="unbounded" />
 			</xs:sequence>
 		</xs:complexType>
 	</xs:element>

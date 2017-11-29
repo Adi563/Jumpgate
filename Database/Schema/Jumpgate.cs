@@ -28,6 +28,12 @@ namespace Jumpgate.Database.Schema {
         
         private Gate[] gatesField;
         
+        private Group[] groupsField;
+        
+        private Item[] itemsField;
+        
+        private ItemStock[] itemStocksField;
+        
         /// <remarks/>
         [System.Xml.Serialization.XmlElementAttribute("Sectors")]
         public Sector[] Sectors {
@@ -47,6 +53,39 @@ namespace Jumpgate.Database.Schema {
             }
             set {
                 this.gatesField = value;
+            }
+        }
+        
+        /// <remarks/>
+        [System.Xml.Serialization.XmlElementAttribute("Groups")]
+        public Group[] Groups {
+            get {
+                return this.groupsField;
+            }
+            set {
+                this.groupsField = value;
+            }
+        }
+        
+        /// <remarks/>
+        [System.Xml.Serialization.XmlElementAttribute("Items")]
+        public Item[] Items {
+            get {
+                return this.itemsField;
+            }
+            set {
+                this.itemsField = value;
+            }
+        }
+        
+        /// <remarks/>
+        [System.Xml.Serialization.XmlElementAttribute("ItemStocks")]
+        public ItemStock[] ItemStocks {
+            get {
+                return this.itemStocksField;
+            }
+            set {
+                this.itemStocksField = value;
             }
         }
     }
@@ -69,6 +108,138 @@ namespace Jumpgate.Database.Schema {
             }
             set {
                 this.sectorIdField = value;
+            }
+        }
+        
+        /// <remarks/>
+        public string Name {
+            get {
+                return this.nameField;
+            }
+            set {
+                this.nameField = value;
+            }
+        }
+    }
+    
+    /// <remarks/>
+    [System.CodeDom.Compiler.GeneratedCodeAttribute("xsd", "4.6.1055.0")]
+    [System.SerializableAttribute()]
+    [System.Diagnostics.DebuggerStepThroughAttribute()]
+    [System.ComponentModel.DesignerCategoryAttribute("code")]
+    public partial class ItemStock {
+        
+        private uint itemIdField;
+        
+        private string stationNameField;
+        
+        private uint basePriceField;
+        
+        private uint amountField;
+        
+        /// <remarks/>
+        public uint ItemId {
+            get {
+                return this.itemIdField;
+            }
+            set {
+                this.itemIdField = value;
+            }
+        }
+        
+        /// <remarks/>
+        public string StationName {
+            get {
+                return this.stationNameField;
+            }
+            set {
+                this.stationNameField = value;
+            }
+        }
+        
+        /// <remarks/>
+        public uint BasePrice {
+            get {
+                return this.basePriceField;
+            }
+            set {
+                this.basePriceField = value;
+            }
+        }
+        
+        /// <remarks/>
+        public uint Amount {
+            get {
+                return this.amountField;
+            }
+            set {
+                this.amountField = value;
+            }
+        }
+    }
+    
+    /// <remarks/>
+    [System.CodeDom.Compiler.GeneratedCodeAttribute("xsd", "4.6.1055.0")]
+    [System.SerializableAttribute()]
+    [System.Diagnostics.DebuggerStepThroughAttribute()]
+    [System.ComponentModel.DesignerCategoryAttribute("code")]
+    public partial class Item {
+        
+        private uint groupIdField;
+        
+        private uint itemIdField;
+        
+        private string nameField;
+        
+        /// <remarks/>
+        public uint GroupId {
+            get {
+                return this.groupIdField;
+            }
+            set {
+                this.groupIdField = value;
+            }
+        }
+        
+        /// <remarks/>
+        public uint ItemId {
+            get {
+                return this.itemIdField;
+            }
+            set {
+                this.itemIdField = value;
+            }
+        }
+        
+        /// <remarks/>
+        public string Name {
+            get {
+                return this.nameField;
+            }
+            set {
+                this.nameField = value;
+            }
+        }
+    }
+    
+    /// <remarks/>
+    [System.CodeDom.Compiler.GeneratedCodeAttribute("xsd", "4.6.1055.0")]
+    [System.SerializableAttribute()]
+    [System.Diagnostics.DebuggerStepThroughAttribute()]
+    [System.ComponentModel.DesignerCategoryAttribute("code")]
+    public partial class Group {
+        
+        private uint groupIdField;
+        
+        private string nameField;
+        
+        /// <remarks/>
+        public uint GroupId {
+            get {
+                return this.groupIdField;
+            }
+            set {
+                this.groupIdField = value;
             }
         }
         
@@ -121,7 +292,6 @@ namespace Jumpgate.Database.Schema {
         }
         
         /// <remarks/>
-        [System.Xml.Serialization.XmlElementAttribute(DataType= "int")]
         public int X {
             get {
                 return this.xField;
@@ -132,7 +302,6 @@ namespace Jumpgate.Database.Schema {
         }
         
         /// <remarks/>
-        [System.Xml.Serialization.XmlElementAttribute(DataType= "int")]
         public int Y {
             get {
                 return this.yField;
@@ -143,7 +312,6 @@ namespace Jumpgate.Database.Schema {
         }
         
         /// <remarks/>
-        [System.Xml.Serialization.XmlElementAttribute(DataType= "int")]
         public int Z {
             get {
                 return this.zField;
