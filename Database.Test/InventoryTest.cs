@@ -45,5 +45,16 @@
                 System.Diagnostics.Debug.WriteLine($"{delivery.To.Name}\t{delivery.Amount}\t{delivery.Price}\t{delivery.From.StationName}\t{delivery.To.StationName}\t{delivery.Profit}");
             }
         }
+
+        [TestMethod]
+        public void GetTaxPercentByPoliticalRatingTest()
+        {
+            var tax = GetTaxPercentByPoliticalRating(75);
+        }
+
+        private static decimal GetTaxPercentByPoliticalRating(sbyte politicalRating)
+        {
+            return -0.02m * politicalRating + 2;
+        }
     }
 }
