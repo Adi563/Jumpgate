@@ -43,12 +43,13 @@ namespace Jumpgate.Database.Test
         {
             var gates = DatabaseHandler.GetGates();
 
-            var fromGate = gates.First(g => g.SectorIn.Id == 1);
-            var toGate = gates.Last(g => g.SectorIn.Id == 2 && g.LeadingTo.Id == 25);
+            var fromGate = gates.First(g => g.SectorIn.Name.Equals("Solrain Wake") && g.LeadingTo.Name.Equals("Purian Lake"));
+            var toGate = gates.First(g => g.SectorIn.Name.Equals("Quantar TriPoint") && g.LeadingTo.Name.Equals("Tictac's Hook"));
 
             var pathes = new System.Collections.Generic.List<Jumpgate.Database.Path>();
             var pathesFromTo = new System.Collections.Generic.List<Jumpgate.Database.Path>();
 
+            // Add pathes to other gates in sector
             foreach (var gateInSector in fromGate.SectorIn.Gates.Except(new Gate[] { fromGate }))
             {
                 var path = new Path();
@@ -57,10 +58,18 @@ namespace Jumpgate.Database.Test
                 pathes.Add(path);
             }
 
+            // Add path to gates in sector leading to
+            foreach (var gateInSector in fromGate.LeadingTo.Gates.Except(new Gate[] { fromGate.LeadingTo.Gates.First(g => g.LeadingTo.Id == fromGate.SectorIn.Id) }))
+            {
+                var path = new Path();
+                path.Gates.Add(fromGate);
+                path.Gates.Add(gateInSector);
+                pathes.Add(path);
+            }
 
             while (pathes.Any())
             {
-                var pathesCloned = pathes.Select(p => p).ToArray();
+                var pathesCloned = pathes.ToArray();
                 pathes.Clear();
                 foreach (var path in pathesCloned)
                 {
