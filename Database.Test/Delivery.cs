@@ -17,6 +17,8 @@
 
         public int DifferencePerItem { get { return (int)To.Price - (int)(From.Price * TaxRate); } }
 
-        public long Profit { get { return (long)(DifferencePerItem) * Amount; } }
+        public uint Price { get { return (uint)(From.Price * TaxRate * Amount); } }
+
+        public long Profit { get { return DifferencePerItem * Amount; } }
     }
 }

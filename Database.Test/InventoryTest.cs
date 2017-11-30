@@ -25,8 +25,8 @@
             var itemsCommodities = items.Where(i => i.GroupName.Equals("Commodities"));
             var itemsGroupedByStations = itemsCommodities.GroupBy(i => i.StationName);
 
-            ushort cargoSpace = 500;
-            decimal taxRate = 1.0088836385115180153573538098051m;
+            ushort cargoSpace = 499;
+            decimal taxRate = 1.0092938888m;
             decimal taxRateRounded = Math.Round(taxRate, 4);
 
             var itemsForCurrentStation = itemsCommodities.Where(i => i.StationName.Equals("Solrain Wake"));
@@ -37,9 +37,12 @@
 
             var deliveriesOrderedByPrice = deliveries.OrderByDescending(delivery => delivery.Profit);
 
-            foreach (var delivery in deliveriesOrderedByPrice)
+            System.Diagnostics.Debug.WriteLine("Name\tAmount\tPrice\tFromStationName\tToStationName\tProfit");
+
+            foreach (var delivery in deliveriesOrderedByPrice.Where(d => d.Profit > 0))
             {
-                System.Diagnostics.Debug.WriteLine($"Item: {delivery.To.Name} ({delivery.Amount}) ({delivery.From.StationName} -> {delivery.To.StationName}) - Profit: {delivery.Profit}");
+                //System.Diagnostics.Debug.WriteLine($"Item: {delivery.To.Name} ({delivery.Amount}) ({delivery.From.StationName} -> {delivery.To.StationName}) - Profit: {delivery.Profit}");
+                System.Diagnostics.Debug.WriteLine($"{delivery.To.Name}\t{delivery.Amount}\t{delivery.Price}\t{delivery.From.StationName}\t{delivery.To.StationName}\t{delivery.Profit}");
             }
         }
     }
