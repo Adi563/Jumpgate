@@ -39,6 +39,12 @@ namespace Jumpgate.Database.Test
         }
 
         [TestMethod]
+        public void InsertGroup()
+        {
+            Jumpgate.Database.DatabaseHandler.InsertGroup(1, "Guns");
+        }
+
+        [TestMethod]
         public void FindShortestPath()
         {
             var gates = DatabaseHandler.GetGates();

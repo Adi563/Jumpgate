@@ -74,5 +74,21 @@
         {
             return itemStocks;
         }
+
+        public static void InsertGroup(uint groupId, string name)
+        {
+            using (var xmlStream = new System.IO.FileStream(@"C:\Projects\Jumpgate\Database\Database.xml", System.IO.FileMode.Open))
+            {
+                var serializer = new System.Xml.Serialization.XmlSerializer(typeof(Schema.Database));
+                var database = (Schema.Database)serializer.Deserialize(xmlStream);
+
+                var newGroups = new Schema.Group[] { new Schema.Group { GroupId = groupId, Name = name } };
+                database.Groups = database.Groups == null ? newGroups : database.Groups.Union(newGroups).ToArray();
+
+                xmlStream.Seek(0, System.IO.SeekOrigin.Begin);
+
+                serializer.Serialize(xmlStream, database);
+            }
+        }
     }
 }
