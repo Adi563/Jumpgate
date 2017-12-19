@@ -13,9 +13,9 @@
             var items = GetInventory();
 
             var itemsForCurrentStation = FilterItems(items, "Solrain Wake");
-            var itemsForOtherStations = FilterItems(items);
+            var itemsForOtherStations = FilterItems(items, "Quantar Core");
 
-            var deliveriesOrderedByProfit = GetDeliveriesOrderedByProfit(itemsForCurrentStation, itemsForOtherStations, 499, 1.0092938888m);
+            var deliveriesOrderedByProfit = GetDeliveriesOrderedByProfit(itemsForCurrentStation, itemsForOtherStations, 749, 1.0092938888m);
 
             System.Diagnostics.Debug.WriteLine("Name\tAmount\tPrice\tFromStationName\tToStationName\tProfit");
 
@@ -42,7 +42,7 @@
         /// <returns></returns>
         private static System.Collections.Generic.IEnumerable<Item> FilterItems(System.Collections.Generic.IEnumerable<Item> items, string stationName)
         {
-            return items.Where(i => i.GroupName.Equals("Commodities")).Where(i => i.StationName.Equals("Solrain Wake"));
+            return items.Where(i => i.GroupName.Equals("Commodities")).Where(i => i.StationName.Equals(stationName));
         }
 
 
