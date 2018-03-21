@@ -19,6 +19,8 @@ Project("{FAE04EC0-301F-11D3-BF4B-00C04F79EFBC}") = "Decrypt", "Decrypt\Decrypt.
 EndProject
 Project("{FAE04EC0-301F-11D3-BF4B-00C04F79EFBC}") = "ChatLogger.Test", "ChatLogger.Test\ChatLogger.Test.csproj", "{1E30937F-5530-4675-A6C1-279583517D8A}"
 EndProject
+Project("{FAE04EC0-301F-11D3-BF4B-00C04F79EFBC}") = "ChatLogger", "ChatLogger\ChatLogger.csproj", "{D6ECB128-26C7-4CE0-AEED-CCD4AE9A4168}"
+EndProject
 Global
 	GlobalSection(SolutionConfigurationPlatforms) = preSolution
 		Debug|Any CPU = Debug|Any CPU
@@ -57,6 +59,10 @@ Global
 		{1E30937F-5530-4675-A6C1-279583517D8A}.Debug|Any CPU.Build.0 = Debug|Any CPU
 		{1E30937F-5530-4675-A6C1-279583517D8A}.Release|Any CPU.ActiveCfg = Release|Any CPU
 		{1E30937F-5530-4675-A6C1-279583517D8A}.Release|Any CPU.Build.0 = Release|Any CPU
+		{D6ECB128-26C7-4CE0-AEED-CCD4AE9A4168}.Debug|Any CPU.ActiveCfg = Debug|Any CPU
+		{D6ECB128-26C7-4CE0-AEED-CCD4AE9A4168}.Debug|Any CPU.Build.0 = Debug|Any CPU
+		{D6ECB128-26C7-4CE0-AEED-CCD4AE9A4168}.Release|Any CPU.ActiveCfg = Release|Any CPU
+		{D6ECB128-26C7-4CE0-AEED-CCD4AE9A4168}.Release|Any CPU.Build.0 = Release|Any CPU
 	EndGlobalSection
 	GlobalSection(SolutionProperties) = preSolution
 		HideSolutionNode = FALSE
