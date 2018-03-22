@@ -99,6 +99,9 @@
   <ItemGroup>
     <EmbeddedResource Include="Rescources\chat.png" />
   </ItemGroup>
+  <ItemGroup>
+    <EmbeddedResource Include="Rescources\AlphabetHigher.png" />
+  </ItemGroup>
   <Choose>
     <When Condition="'$(VisualStudioVersion)' == '10.0' And '$(IsCodedUITest)' == 'True'">
       <ItemGroup>

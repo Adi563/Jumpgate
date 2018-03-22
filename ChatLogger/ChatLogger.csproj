@@ -41,6 +41,23 @@
   </ItemGroup>
   <ItemGroup>
     <Compile Include="Characters\CharacterBase.cs" />
+    <Compile Include="Characters\HigherF.cs" />
+    <Compile Include="Characters\HigherA.cs" />
+    <Compile Include="Characters\HigherN.cs" />
+    <Compile Include="Characters\HigherU.cs" />
+    <Compile Include="Characters\HigherG.cs" />
+    <Compile Include="Characters\HigherC.cs" />
+    <Compile Include="Characters\HigherD.cs" />
+    <Compile Include="Characters\HigherO.cs" />
+    <Compile Include="Characters\HigherL.cs" />
+    <Compile Include="Characters\HigherI.cs" />
+    <Compile Include="Characters\HigherR.cs" />
+    <Compile Include="Characters\HigherT.cs" />
+    <Compile Include="Characters\HigherK.cs" />
+    <Compile Include="Characters\LowerJ.cs" />
+    <Compile Include="Characters\LowerM.cs" />
+    <Compile Include="Characters\LowerU.cs" />
+    <Compile Include="Characters\LowerP.cs" />
     <Compile Include="Characters\LowerB.cs" />
     <Compile Include="Characters\LowerL.cs" />
     <Compile Include="Characters\LowerH.cs" />
@@ -68,7 +85,11 @@
     <Compile Include="Characters\LowerG.cs" />
     <Compile Include="Characters\LowerY.cs" />
     <Compile Include="Characters\LowerA.cs" />
+    <Compile Include="Characters\SpecialHyphen.cs" />
+    <Compile Include="Characters\SpecialExclamation.cs" />
     <Compile Include="Characters\SpecialDot.cs" />
+    <Compile Include="Characters\SpecialApostrophe.cs" />
+    <Compile Include="Characters\SpecialSlash.cs" />
     <Compile Include="Characters\SpecialSpace.cs" />
     <Compile Include="Characters\SpecialColon.cs" />
     <Compile Include="Characters\LowerV.cs" />

@@ -13,9 +13,22 @@
 
         public ChatImageProcessor()
         {
+            characterSet.Add(new Characters.HigherA());
             characterSet.Add(new Characters.HigherB());
+            characterSet.Add(new Characters.HigherC());
+            characterSet.Add(new Characters.HigherD());
+            characterSet.Add(new Characters.HigherF());
+            characterSet.Add(new Characters.HigherG());
+            characterSet.Add(new Characters.HigherI());
+            characterSet.Add(new Characters.HigherK());
+            characterSet.Add(new Characters.HigherL());
             characterSet.Add(new Characters.HigherM());
+            characterSet.Add(new Characters.HigherN());
+            characterSet.Add(new Characters.HigherO());
+            characterSet.Add(new Characters.HigherR());
             characterSet.Add(new Characters.HigherS());
+            characterSet.Add(new Characters.HigherT());
+            characterSet.Add(new Characters.HigherU());
             characterSet.Add(new Characters.LowerA());
             characterSet.Add(new Characters.LowerB());
             characterSet.Add(new Characters.LowerC());
@@ -25,13 +38,17 @@
             characterSet.Add(new Characters.LowerG());
             characterSet.Add(new Characters.LowerH());
             characterSet.Add(new Characters.LowerI());
+            characterSet.Add(new Characters.LowerJ());
             characterSet.Add(new Characters.LowerK());
             characterSet.Add(new Characters.LowerL());
+            characterSet.Add(new Characters.LowerM());
             characterSet.Add(new Characters.LowerN());
             characterSet.Add(new Characters.LowerO());
+            characterSet.Add(new Characters.LowerP());
             characterSet.Add(new Characters.LowerR());
             characterSet.Add(new Characters.LowerS());
             characterSet.Add(new Characters.LowerT());
+            characterSet.Add(new Characters.LowerU());
             characterSet.Add(new Characters.LowerV());
             characterSet.Add(new Characters.LowerW());
             characterSet.Add(new Characters.LowerY());
@@ -41,12 +58,16 @@
             characterSet.Add(new Characters.NumberFour());
             characterSet.Add(new Characters.NumberFive());
             characterSet.Add(new Characters.NumberSix());
+            characterSet.Add(new Characters.SpecialSpace());
             characterSet.Add(new Characters.SpecialAt());
             characterSet.Add(new Characters.SpecialColon());
             characterSet.Add(new Characters.SpecialDot());
             characterSet.Add(new Characters.SpecialBracketOpen());
             characterSet.Add(new Characters.SpecialBracketClosed());
-            characterSet.Add(new Characters.SpecialSpace());
+            characterSet.Add(new Characters.SpecialSlash());
+            characterSet.Add(new Characters.SpecialExclamation());
+            characterSet.Add(new Characters.SpecialHyphen());
+            characterSet.Add(new Characters.SpecialApostrophe());
         }
 
         public void ScreenCaptureTest()
@@ -95,9 +116,11 @@
         {
             var buffer = new char[LinesPerChat * MaximumCharactersPerLine + LinesPerChat * 2];
 
+            var backgroundColor = bitmap.GetPixel(0, 0);
+
             for (int l = 0; l < LinesPerChat; l++)
             {
-                var fontColor = GetFontColor(bitmap, System.Drawing.Color.FromArgb(255, 10, 10, 10), (l * CharacterHeight + CharacterHeight / 2));
+                var fontColor = GetFontColor(bitmap, backgroundColor, (l * CharacterHeight + CharacterHeight / 2));
 
                 for (int c = 0; c < MaximumCharactersPerLine; c++)
                 {
