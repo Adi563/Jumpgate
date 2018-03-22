@@ -4,8 +4,8 @@
     {
         const byte MaximumCharactersPerLine = 59;
         const byte LinesPerChat = 6;
-        const byte CharacterWidth = 5;
-        const byte CharacterHeight = 9;
+        const byte CharacterWidth = 6;
+        const byte CharacterHeight = 11;
 
         public void ScreenCaptureTest()
         {
@@ -51,8 +51,8 @@
             {
                 for (int c = 0; c < MaximumCharactersPerLine; c++)
                 {
-                    byte x = (byte)(c * CharacterWidth + 1);
-                    byte y = (byte)(l * CharacterHeight + 1);
+                    byte x = (byte)(c * CharacterWidth);
+                    byte y = (byte)(l * CharacterHeight);
                     buffer[l * c + c] = GetChatImageCharacter(bitmap, x, y);
                 }
             }
@@ -62,11 +62,17 @@
 
         public char GetChatImageCharacter(System.Drawing.Bitmap bitmap, int x, int y)
         {
-            var pixel00 = bitmap.GetPixel(x + 0, y + 0);
-            var pixel10 = bitmap.GetPixel(x + 1, y + 0);
-            var pixel20 = bitmap.GetPixel(x + 2, y + 0);
-            var pixel30 = bitmap.GetPixel(x + 3, y + 0);
-            var pixel40 = bitmap.GetPixel(x + 4, y + 0);
+            var characterMap = new System.Drawing.Color[CharacterHeight][];
+
+            for (int h = 0; h < CharacterHeight; h++)
+            {
+                characterMap[h] = new System.Drawing.Color[CharacterWidth];
+
+                for (int w = 0; w < CharacterWidth; w++)
+                {
+                    characterMap[h][w] = bitmap.GetPixel(x + w, y + h);
+                }
+            }
 
             return ' ';
         }
