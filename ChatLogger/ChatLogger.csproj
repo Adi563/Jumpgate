@@ -41,6 +41,20 @@
   </ItemGroup>
   <ItemGroup>
     <Compile Include="Characters\CharacterBase.cs" />
+    <Compile Include="Characters\HigherM.cs" />
+    <Compile Include="Characters\LowerC.cs" />
+    <Compile Include="Characters\LowerD.cs" />
+    <Compile Include="Characters\LowerN.cs" />
+    <Compile Include="Characters\LowerO.cs" />
+    <Compile Include="Characters\LowerS.cs" />
+    <Compile Include="Characters\LowerW.cs" />
+    <Compile Include="Characters\LowerF.cs" />
+    <Compile Include="Characters\LowerK.cs" />
+    <Compile Include="Characters\LowerT.cs" />
+    <Compile Include="Characters\LowerY.cs" />
+    <Compile Include="Characters\LowerA.cs" />
+    <Compile Include="Characters\SpecialDot.cs" />
+    <Compile Include="Characters\SpecialSpace.cs" />
     <Compile Include="Characters\SpecialColon.cs" />
     <Compile Include="Characters\LowerV.cs" />
     <Compile Include="Characters\LowerR.cs" />

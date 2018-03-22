@@ -13,11 +13,25 @@
 
         public ChatImageProcessor()
         {
+            characterSet.Add(new Characters.HigherM());
             characterSet.Add(new Characters.HigherS());
+            characterSet.Add(new Characters.LowerA());
+            characterSet.Add(new Characters.LowerC());
+            characterSet.Add(new Characters.LowerD());
             characterSet.Add(new Characters.LowerE());
+            characterSet.Add(new Characters.LowerF());
+            characterSet.Add(new Characters.LowerK());
+            characterSet.Add(new Characters.LowerN());
+            characterSet.Add(new Characters.LowerO());
             characterSet.Add(new Characters.LowerR());
+            characterSet.Add(new Characters.LowerS());
+            characterSet.Add(new Characters.LowerT());
             characterSet.Add(new Characters.LowerV());
+            characterSet.Add(new Characters.LowerW());
+            characterSet.Add(new Characters.LowerY());
             characterSet.Add(new Characters.SpecialColon());
+            characterSet.Add(new Characters.SpecialDot());
+            characterSet.Add(new Characters.SpecialSpace());
         }
 
         public void ScreenCaptureTest()
@@ -72,9 +86,9 @@
 
                 for (int c = 0; c < MaximumCharactersPerLine; c++)
                 {
-                    byte x = (byte)(c * CharacterWidth);
-                    byte y = (byte)(l * CharacterHeight);
-                    buffer[l * c + c] = GetChatImageCharacter(bitmap, fontColor, x, y);
+                    int x = c * CharacterWidth;
+                    int y = l * CharacterHeight;
+                    buffer[l * MaximumCharactersPerLine + c] = GetChatImageCharacter(bitmap, fontColor, x, y);
                 }
             }
 

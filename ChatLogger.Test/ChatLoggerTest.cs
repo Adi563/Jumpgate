@@ -43,7 +43,8 @@ namespace ChatLogger.Test
 
             var bitmap = System.Drawing.Bitmap.FromStream(stream);
 
-            new ChatImageProcessor().ConvertChatImageToText((System.Drawing.Bitmap)bitmap);
+            var chatImageProcessor = new ChatImageProcessor();
+            string text = chatImageProcessor.ConvertChatImageToText((System.Drawing.Bitmap)bitmap);
         }
     }
 }
