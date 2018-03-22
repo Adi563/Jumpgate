@@ -40,7 +40,9 @@
     <Reference Include="System.Xml" />
   </ItemGroup>
   <ItemGroup>
-    <Compile Include="Characters\S.cs" />
+    <Compile Include="Characters\CharacterBase.cs" />
+    <Compile Include="Characters\LowerE.cs" />
+    <Compile Include="Characters\HigherS.cs" />
     <Compile Include="ChatImageProcessor.cs" />
     <Compile Include="Properties\AssemblyInfo.cs" />
   </ItemGroup>

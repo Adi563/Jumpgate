@@ -1,8 +1,10 @@
-﻿namespace ChatLogger.Characters
+﻿using System;
+
+namespace ChatLogger.Characters
 {
-    public class S
+    public class HigherS : CharacterBase
     {
-        static S()
+        public HigherS()
         {
             BooleanMap = new bool[11][];
 
@@ -19,19 +21,6 @@
             BooleanMap[10] = new bool[6];
         }
 
-        public static bool[][] BooleanMap { get; private set; }
-
-        public static bool Match(System.Drawing.Color[][] colorMap, System.Drawing.Color fontColor)
-        {
-            for (int h = 0; h < BooleanMap.Length; h++)
-            {
-                for (int w = 0; w < BooleanMap[h].Length; w++)
-                {
-                    if (BooleanMap[h][w] && !colorMap[h][w].Equals(fontColor)) { return false; }
-                }
-            }
-
-            return true;
-        }
+        public override char Character { get { return 'S'; } }
     }
 }

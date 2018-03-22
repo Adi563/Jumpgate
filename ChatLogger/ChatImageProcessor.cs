@@ -1,11 +1,21 @@
 ﻿namespace ChatLogger
 {
+    using System.Linq;
+
     public class ChatImageProcessor
     {
         const byte MaximumCharactersPerLine = 59;
         const byte LinesPerChat = 6;
         const byte CharacterWidth = 6;
         const byte CharacterHeight = 11;
+
+        private System.Collections.Generic.List<Characters.CharacterBase> characterSet = new System.Collections.Generic.List<Characters.CharacterBase>();
+
+        public ChatImageProcessor()
+        {
+            characterSet.Add(new Characters.HigherS());
+            characterSet.Add(new Characters.LowerE());
+        }
 
         public void ScreenCaptureTest()
         {
@@ -124,10 +134,11 @@
         /// <returns></returns>
         public char GetCharacterByColorMap(System.Drawing.Color[][] colorMap, System.Drawing.Color fontColor)
         {
-            if (Characters.S.Match(colorMap, fontColor))
-            { return 'S'; }
+            var character = characterSet.AsParallel().FirstOrDefault(c => c.Match(colorMap, fontColor));
 
-            return ' ';
+            if (character == null) { throw new System.NotImplementedException("Character not implemented"); }
+
+            return character.Character;
         }
     }
 }
