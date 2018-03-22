@@ -56,23 +56,31 @@
                     buffer[l * c + c] = GetChatImageCharacter(bitmap, x, y);
                 }
             }
-            
-            return null;
+
+            return new string(buffer);
         }
 
         public char GetChatImageCharacter(System.Drawing.Bitmap bitmap, int x, int y)
         {
-            var characterMap = new System.Drawing.Color[CharacterHeight][];
+            var colorMap = new System.Drawing.Color[CharacterHeight][];
 
             for (int h = 0; h < CharacterHeight; h++)
             {
-                characterMap[h] = new System.Drawing.Color[CharacterWidth];
+                colorMap[h] = new System.Drawing.Color[CharacterWidth];
 
                 for (int w = 0; w < CharacterWidth; w++)
                 {
-                    characterMap[h][w] = bitmap.GetPixel(x + w, y + h);
+                    colorMap[h][w] = bitmap.GetPixel(x + w, y + h);
                 }
             }
+
+            return GetCharacterByColorMap(colorMap, System.Drawing.Color.FromArgb(255, 255, 255, 0));
+        }
+
+        public char GetCharacterByColorMap(System.Drawing.Color[][] colorMap, System.Drawing.Color fontColor)
+        {
+            if (Characters.S.Match(colorMap, fontColor))
+            { return 'S'; }
 
             return ' ';
         }
