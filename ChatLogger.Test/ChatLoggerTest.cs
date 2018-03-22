@@ -39,7 +39,7 @@ namespace ChatLogger.Test
         [TestMethod]
         public void ConvertChatImageToText()
         {
-            var stream = this.GetType().Assembly.GetManifestResourceStream("ChatLogger.Test.Rescources.AlphabetLower.png");
+            var stream = this.GetType().Assembly.GetManifestResourceStream("ChatLogger.Test.Rescources.SpecialCharacters.png");
 
             var bitmap = System.Drawing.Bitmap.FromStream(stream);
 

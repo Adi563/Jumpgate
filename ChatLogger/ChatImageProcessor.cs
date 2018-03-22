@@ -42,6 +42,7 @@
             characterSet.Add(new Characters.LowerA());
             characterSet.Add(new Characters.LowerB());
             characterSet.Add(new Characters.LowerC());
+            characterSet.Add(new Characters.LowerCWithCedille());
             characterSet.Add(new Characters.LowerD());
             characterSet.Add(new Characters.LowerE());
             characterSet.Add(new Characters.LowerF());
@@ -85,6 +86,12 @@
             characterSet.Add(new Characters.SpecialExclamation());
             characterSet.Add(new Characters.SpecialHyphen());
             characterSet.Add(new Characters.SpecialApostrophe());
+            characterSet.Add(new Characters.SpecialParagraph());
+            characterSet.Add(new Characters.SpecialDegree());
+            characterSet.Add(new Characters.SpecialPlus());
+            characterSet.Add(new Characters.SpecialMultiply());
+            characterSet.Add(new Characters.SpecialQuoteSign());
+            characterSet.Add(new Characters.SpecialPercent());
         }
 
         public void ScreenCaptureTest()
@@ -145,11 +152,11 @@
                     int y = l * CharacterHeight;
                     buffer[l * MaximumCharactersPerLine + c + l * 2] = GetChatImageCharacter(bitmap, fontColor, x, y);
                 }
-
+                
                 buffer[(l+1) * MaximumCharactersPerLine + l * 2] = '\r';
                 buffer[(l+1) * MaximumCharactersPerLine + l * 2 + 1] = '\n';
             }
-
+            
             return new string(buffer);
         }
 

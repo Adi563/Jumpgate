@@ -64,6 +64,7 @@
     <Compile Include="Characters\HigherR.cs" />
     <Compile Include="Characters\HigherT.cs" />
     <Compile Include="Characters\HigherK.cs" />
+    <Compile Include="Characters\LowerCWithCedille.cs" />
     <Compile Include="Characters\LowerJ.cs" />
     <Compile Include="Characters\LowerM.cs" />
     <Compile Include="Characters\LowerQ.cs" />
@@ -78,6 +79,12 @@
     <Compile Include="Characters\NumberEight.cs" />
     <Compile Include="Characters\NumberSeven.cs" />
     <Compile Include="Characters\NumberTwo.cs" />
+    <Compile Include="Characters\SpecialPercent.cs" />
+    <Compile Include="Characters\SpecialMultiply.cs" />
+    <Compile Include="Characters\SpecialQuoteSign.cs" />
+    <Compile Include="Characters\SpecialPlus.cs" />
+    <Compile Include="Characters\SpecialDegree.cs" />
+    <Compile Include="Characters\SpecialParagraph.cs" />
     <Compile Include="Characters\SpecialBracketClosed.cs" />
     <Compile Include="Characters\SpecialBracketOpen.cs" />
     <Compile Include="Characters\NumberSix.cs" />
