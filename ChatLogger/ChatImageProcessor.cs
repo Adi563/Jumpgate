@@ -78,7 +78,7 @@
         /// <returns></returns>
         public string ConvertChatImageToText(System.Drawing.Bitmap bitmap)
         {
-            var buffer = new char[LinesPerChat * MaximumCharactersPerLine];
+            var buffer = new char[LinesPerChat * MaximumCharactersPerLine + LinesPerChat * 2];
 
             for (int l = 0; l < LinesPerChat; l++)
             {
@@ -88,8 +88,11 @@
                 {
                     int x = c * CharacterWidth;
                     int y = l * CharacterHeight;
-                    buffer[l * MaximumCharactersPerLine + c] = GetChatImageCharacter(bitmap, fontColor, x, y);
+                    buffer[l * MaximumCharactersPerLine + c + l * 2] = GetChatImageCharacter(bitmap, fontColor, x, y);
                 }
+
+                buffer[(l+1) * MaximumCharactersPerLine ] = '\r';
+                buffer[(l+1) * MaximumCharactersPerLine + 1] = '\n';
             }
 
             return new string(buffer);
