@@ -15,6 +15,9 @@
         {
             characterSet.Add(new Characters.HigherS());
             characterSet.Add(new Characters.LowerE());
+            characterSet.Add(new Characters.LowerR());
+            characterSet.Add(new Characters.LowerV());
+            characterSet.Add(new Characters.SpecialColon());
         }
 
         public void ScreenCaptureTest()

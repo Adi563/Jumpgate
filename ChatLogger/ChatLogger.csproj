@@ -41,6 +41,9 @@
   </ItemGroup>
   <ItemGroup>
     <Compile Include="Characters\CharacterBase.cs" />
+    <Compile Include="Characters\SpecialColon.cs" />
+    <Compile Include="Characters\LowerV.cs" />
+    <Compile Include="Characters\LowerR.cs" />
     <Compile Include="Characters\LowerE.cs" />
     <Compile Include="Characters\HigherS.cs" />
     <Compile Include="ChatImageProcessor.cs" />
