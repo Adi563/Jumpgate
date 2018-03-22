@@ -41,9 +41,23 @@
   </ItemGroup>
   <ItemGroup>
     <Compile Include="Characters\CharacterBase.cs" />
+    <Compile Include="Characters\LowerB.cs" />
+    <Compile Include="Characters\LowerL.cs" />
+    <Compile Include="Characters\LowerH.cs" />
+    <Compile Include="Characters\SpecialBracketClosed.cs" />
+    <Compile Include="Characters\SpecialBracketOpen.cs" />
+    <Compile Include="Characters\NumberSix.cs" />
+    <Compile Include="Characters\NumberFour.cs" />
+    <Compile Include="Characters\NumberThree.cs" />
+    <Compile Include="Characters\NumberFive.cs" />
+    <Compile Include="Characters\NumberOne.cs" />
+    <Compile Include="Characters\NumberZero.cs" />
+    <Compile Include="Characters\HigherB.cs" />
+    <Compile Include="Characters\SpecialAt.cs" />
     <Compile Include="Characters\HigherM.cs" />
     <Compile Include="Characters\LowerC.cs" />
     <Compile Include="Characters\LowerD.cs" />
+    <Compile Include="Characters\LowerI.cs" />
     <Compile Include="Characters\LowerN.cs" />
     <Compile Include="Characters\LowerO.cs" />
     <Compile Include="Characters\LowerS.cs" />
@@ -51,6 +65,7 @@
     <Compile Include="Characters\LowerF.cs" />
     <Compile Include="Characters\LowerK.cs" />
     <Compile Include="Characters\LowerT.cs" />
+    <Compile Include="Characters\LowerG.cs" />
     <Compile Include="Characters\LowerY.cs" />
     <Compile Include="Characters\LowerA.cs" />
     <Compile Include="Characters\SpecialDot.cs" />

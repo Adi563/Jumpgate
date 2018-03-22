@@ -13,14 +13,20 @@
 
         public ChatImageProcessor()
         {
+            characterSet.Add(new Characters.HigherB());
             characterSet.Add(new Characters.HigherM());
             characterSet.Add(new Characters.HigherS());
             characterSet.Add(new Characters.LowerA());
+            characterSet.Add(new Characters.LowerB());
             characterSet.Add(new Characters.LowerC());
             characterSet.Add(new Characters.LowerD());
             characterSet.Add(new Characters.LowerE());
             characterSet.Add(new Characters.LowerF());
+            characterSet.Add(new Characters.LowerG());
+            characterSet.Add(new Characters.LowerH());
+            characterSet.Add(new Characters.LowerI());
             characterSet.Add(new Characters.LowerK());
+            characterSet.Add(new Characters.LowerL());
             characterSet.Add(new Characters.LowerN());
             characterSet.Add(new Characters.LowerO());
             characterSet.Add(new Characters.LowerR());
@@ -29,8 +35,17 @@
             characterSet.Add(new Characters.LowerV());
             characterSet.Add(new Characters.LowerW());
             characterSet.Add(new Characters.LowerY());
+            characterSet.Add(new Characters.NumberZero());
+            characterSet.Add(new Characters.NumberOne());
+            characterSet.Add(new Characters.NumberThree());
+            characterSet.Add(new Characters.NumberFour());
+            characterSet.Add(new Characters.NumberFive());
+            characterSet.Add(new Characters.NumberSix());
+            characterSet.Add(new Characters.SpecialAt());
             characterSet.Add(new Characters.SpecialColon());
             characterSet.Add(new Characters.SpecialDot());
+            characterSet.Add(new Characters.SpecialBracketOpen());
+            characterSet.Add(new Characters.SpecialBracketClosed());
             characterSet.Add(new Characters.SpecialSpace());
         }
 
@@ -91,8 +106,8 @@
                     buffer[l * MaximumCharactersPerLine + c + l * 2] = GetChatImageCharacter(bitmap, fontColor, x, y);
                 }
 
-                buffer[(l+1) * MaximumCharactersPerLine ] = '\r';
-                buffer[(l+1) * MaximumCharactersPerLine + 1] = '\n';
+                buffer[(l+1) * MaximumCharactersPerLine + l * 2] = '\r';
+                buffer[(l+1) * MaximumCharactersPerLine + l * 2 + 1] = '\n';
             }
 
             return new string(buffer);
