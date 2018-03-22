@@ -43,24 +43,62 @@
             return true;
         }
 
+
+        /// <summary>
+        /// Converts the chat image to text.
+        /// </summary>
+        /// <param name="bitmap">The bitmap.</param>
+        /// <returns></returns>
         public string ConvertChatImageToText(System.Drawing.Bitmap bitmap)
         {
             var buffer = new char[LinesPerChat * MaximumCharactersPerLine];
 
             for (int l = 0; l < LinesPerChat; l++)
             {
+                var fontColor = GetFontColor(bitmap, System.Drawing.Color.FromArgb(255, 10, 10, 10), (l * CharacterHeight + CharacterHeight / 2));
+
                 for (int c = 0; c < MaximumCharactersPerLine; c++)
                 {
                     byte x = (byte)(c * CharacterWidth);
                     byte y = (byte)(l * CharacterHeight);
-                    buffer[l * c + c] = GetChatImageCharacter(bitmap, x, y);
+                    buffer[l * c + c] = GetChatImageCharacter(bitmap, fontColor, x, y);
                 }
             }
 
             return new string(buffer);
         }
 
-        public char GetChatImageCharacter(System.Drawing.Bitmap bitmap, int x, int y)
+
+        /// <summary>
+        /// Gets the color of the font.
+        /// </summary>
+        /// <param name="bitmap">The bitmap.</param>
+        /// <param name="backgroundColor">Color of the background.</param>
+        /// <param name="y">The y.</param>
+        /// <returns></returns>
+        /// <exception cref="System.Exception">Font color not found</exception>
+        public System.Drawing.Color GetFontColor(System.Drawing.Bitmap bitmap, System.Drawing.Color backgroundColor, int y)
+        {
+            for (int x = 0; x < bitmap.Width; x++)
+            {
+                var pixelColor = bitmap.GetPixel(x, y);
+
+                if (!pixelColor.Equals(backgroundColor)) { return pixelColor; }
+            }
+
+            throw new System.Exception("Font color not found");
+        }
+
+
+        /// <summary>
+        /// Gets the chat image character.
+        /// </summary>
+        /// <param name="bitmap">The bitmap.</param>
+        /// <param name="fontColor">Color of the font.</param>
+        /// <param name="x">The x.</param>
+        /// <param name="y">The y.</param>
+        /// <returns></returns>
+        public char GetChatImageCharacter(System.Drawing.Bitmap bitmap, System.Drawing.Color fontColor, int x, int y)
         {
             var colorMap = new System.Drawing.Color[CharacterHeight][];
 
@@ -74,9 +112,16 @@
                 }
             }
 
-            return GetCharacterByColorMap(colorMap, System.Drawing.Color.FromArgb(255, 255, 255, 0));
+            return GetCharacterByColorMap(colorMap, fontColor);
         }
 
+
+        /// <summary>
+        /// Gets the character by color map.
+        /// </summary>
+        /// <param name="colorMap">The color map.</param>
+        /// <param name="fontColor">Color of the font.</param>
+        /// <returns></returns>
         public char GetCharacterByColorMap(System.Drawing.Color[][] colorMap, System.Drawing.Color fontColor)
         {
             if (Characters.S.Match(colorMap, fontColor))
