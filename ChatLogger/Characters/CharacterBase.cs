@@ -10,7 +10,7 @@
             {
                 for (int w = 0; w < BooleanMap[h].Length; w++)
                 {
-                    if (BooleanMap[h][w] && !colorMap[h][w].Equals(fontColor)) { return false; }
+                    if ((!BooleanMap[h][w] && colorMap[h][w].Equals(fontColor)) || (BooleanMap[h][w] && !colorMap[h][w].Equals(fontColor))) { return false; }
                 }
             }
 
