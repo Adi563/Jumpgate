@@ -41,9 +41,19 @@
   </ItemGroup>
   <ItemGroup>
     <Compile Include="Characters\CharacterBase.cs" />
+    <Compile Include="Characters\HigherZ.cs" />
+    <Compile Include="Characters\HigherY.cs" />
+    <Compile Include="Characters\HigherX.cs" />
+    <Compile Include="Characters\HigherW.cs" />
+    <Compile Include="Characters\HigherQ.cs" />
+    <Compile Include="Characters\HigherP.cs" />
+    <Compile Include="Characters\HigherJ.cs" />
+    <Compile Include="Characters\HigherH.cs" />
+    <Compile Include="Characters\HigherE.cs" />
     <Compile Include="Characters\HigherF.cs" />
     <Compile Include="Characters\HigherA.cs" />
     <Compile Include="Characters\HigherN.cs" />
+    <Compile Include="Characters\HigherV.cs" />
     <Compile Include="Characters\HigherU.cs" />
     <Compile Include="Characters\HigherG.cs" />
     <Compile Include="Characters\HigherC.cs" />
