@@ -108,6 +108,9 @@
   <ItemGroup>
     <EmbeddedResource Include="Rescources\SpecialCharacters.png" />
   </ItemGroup>
+  <ItemGroup>
+    <EmbeddedResource Include="Rescources\AlphabetHigherDiaeresis.png" />
+  </ItemGroup>
   <Choose>
     <When Condition="'$(VisualStudioVersion)' == '10.0' And '$(IsCodedUITest)' == 'True'">
       <ItemGroup>
