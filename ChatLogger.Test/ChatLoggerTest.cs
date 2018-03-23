@@ -37,9 +37,18 @@ namespace ChatLogger.Test
         }
 
         [TestMethod]
+        public void GetChatImageFromScreenshot()
+        {
+            var screenshot = System.Drawing.Bitmap.FromFile(@"C:\Users\Adrian\Downloads\Temp\VirtualBox_Jumpgate_23_03_2018_10_40_27.png");
+            var image = new ChatImageProcessor().GetChatImageFromScreenshot(screenshot);
+            image.Save(@"C:\Users\Adrian\Downloads\Temp\chat.png");
+        }
+
+        [TestMethod]
         public void ConvertChatImageToText()
         {
             var stream = this.GetType().Assembly.GetManifestResourceStream("ChatLogger.Test.Rescources.SpecialCharacters.png");
+            //var stream = System.IO.File.Open(@"C:\Users\Adrian\Downloads\Temp\chat.png", System.IO.FileMode.Open);
 
             var bitmap = System.Drawing.Bitmap.FromStream(stream);
 

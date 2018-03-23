@@ -4,6 +4,11 @@
 
     public class ChatImageProcessor
     {
+        const int ChatPositionX = 81;
+        const int ChatPositionY = 31;
+        const int ChatWidth = 354;
+        const int ChatHeight = 66;
+
         const byte MaximumCharactersPerLine = 59;
         const byte LinesPerChat = 6;
         const byte CharacterWidth = 6;
@@ -122,6 +127,10 @@
             characterSet.Add(new Characters.SpecialHashTag());
         }
 
+
+        /// <summary>
+        /// Screens the capture test.
+        /// </summary>
         public void ScreenCaptureTest()
         {
             var bitmapOld = new System.Drawing.Bitmap(374, 66);
@@ -144,6 +153,28 @@
             }
         }
 
+
+        /// <summary>
+        /// Gets the chat image from screenshot.
+        /// </summary>
+        /// <param name="screenshot">The screenshot.</param>
+        /// <returns></returns>
+        public System.Drawing.Image GetChatImageFromScreenshot(System.Drawing.Image screenshot)
+        {
+            var chatImage = new System.Drawing.Bitmap(ChatWidth, ChatHeight);
+            var chatGraphics = System.Drawing.Graphics.FromImage(chatImage);
+
+            chatGraphics.DrawImage(screenshot, new System.Drawing.Rectangle(0, 0, ChatWidth, ChatHeight), ChatPositionX, ChatPositionY, ChatWidth, ChatHeight, System.Drawing.GraphicsUnit.Pixel);
+            return chatImage;
+        }
+
+
+        /// <summary>
+        /// Compares the images.
+        /// </summary>
+        /// <param name="image1">The image1.</param>
+        /// <param name="image2">The image2.</param>
+        /// <returns></returns>
         private static bool CompareImages(System.Drawing.Bitmap image1, System.Drawing.Bitmap image2)
         {
             for (int x = 0; x < image1.Width; x++)
