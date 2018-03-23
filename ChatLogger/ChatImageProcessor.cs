@@ -133,14 +133,14 @@
         /// </summary>
         public void ScreenCaptureTest()
         {
-            var bitmapOld = new System.Drawing.Bitmap(374, 66);
+            var bitmapOld = new System.Drawing.Bitmap(ChatWidth, ChatHeight);
             var graphicsOld = System.Drawing.Graphics.FromImage(bitmapOld);
-            var bitmapNew = new System.Drawing.Bitmap(374, 66);
+            var bitmapNew = new System.Drawing.Bitmap(ChatWidth, ChatHeight);
             var graphicsNew = System.Drawing.Graphics.FromImage(bitmapNew);
 
             while (true)
             {
-                graphicsNew.CopyFromScreen(80, 30, 0, 0, new System.Drawing.Size(bitmapNew.Width, bitmapNew.Height), System.Drawing.CopyPixelOperation.SourceCopy);
+                graphicsNew.CopyFromScreen(ChatPositionX, ChatPositionY, 0, 0, new System.Drawing.Size(bitmapNew.Width, bitmapNew.Height), System.Drawing.CopyPixelOperation.SourceCopy);
 
                 if (CompareImages(bitmapOld, bitmapNew))
                 {
@@ -149,7 +149,6 @@
                 }
 
                 graphicsOld.DrawImage(bitmapNew, 0, 0);
-
             }
         }
 
