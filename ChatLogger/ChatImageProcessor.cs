@@ -40,11 +40,14 @@
             characterSet.Add(new Characters.HigherY());
             characterSet.Add(new Characters.HigherZ());
             characterSet.Add(new Characters.LowerA());
+            characterSet.Add(new Characters.LowerAWithGrave());
             characterSet.Add(new Characters.LowerB());
             characterSet.Add(new Characters.LowerC());
             characterSet.Add(new Characters.LowerCWithCedille());
             characterSet.Add(new Characters.LowerD());
             characterSet.Add(new Characters.LowerE());
+            characterSet.Add(new Characters.LowerEWithAcute());
+            characterSet.Add(new Characters.LowerEWithGrave());
             characterSet.Add(new Characters.LowerF());
             characterSet.Add(new Characters.LowerG());
             characterSet.Add(new Characters.LowerH());
@@ -82,6 +85,10 @@
             characterSet.Add(new Characters.SpecialDot());
             characterSet.Add(new Characters.SpecialBracketOpen());
             characterSet.Add(new Characters.SpecialBracketClosed());
+            characterSet.Add(new Characters.SpecialCurlyBracketOpen());
+            characterSet.Add(new Characters.SpecialCurlyBracketClosed());
+            characterSet.Add(new Characters.SpecialSquareBracketOpen());
+            characterSet.Add(new Characters.SpecialSquareBracketClosed());
             characterSet.Add(new Characters.SpecialSlash());
             characterSet.Add(new Characters.SpecialExclamation());
             characterSet.Add(new Characters.SpecialHyphen());
@@ -92,6 +99,17 @@
             characterSet.Add(new Characters.SpecialMultiply());
             characterSet.Add(new Characters.SpecialQuoteSign());
             characterSet.Add(new Characters.SpecialPercent());
+            characterSet.Add(new Characters.SpecialEqual());
+            characterSet.Add(new Characters.SpecialQuestionMark());
+            characterSet.Add(new Characters.SpecialSingleQuotaLeft());
+            characterSet.Add(new Characters.SpecialSingleQuotaRight());
+            characterSet.Add(new Characters.SpecialTilde());
+            characterSet.Add(new Characters.SpecialNegation());
+            characterSet.Add(new Characters.SpecialVerticalBar());
+            characterSet.Add(new Characters.SpecialCent());
+            characterSet.Add(new Characters.SpecialPound());
+            characterSet.Add(new Characters.SpecialUnderline());
+            characterSet.Add(new Characters.SpecialCircumflex());
         }
 
         public void ScreenCaptureTest()
