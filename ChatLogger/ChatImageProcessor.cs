@@ -40,6 +40,7 @@
             characterSet.Add(new Characters.HigherY());
             characterSet.Add(new Characters.HigherZ());
             characterSet.Add(new Characters.LowerA());
+            characterSet.Add(new Characters.LowerAWithDiaeresis());
             characterSet.Add(new Characters.LowerAWithGrave());
             characterSet.Add(new Characters.LowerB());
             characterSet.Add(new Characters.LowerC());
@@ -58,6 +59,7 @@
             characterSet.Add(new Characters.LowerM());
             characterSet.Add(new Characters.LowerN());
             characterSet.Add(new Characters.LowerO());
+            characterSet.Add(new Characters.LowerOWithDiaeresis());
             characterSet.Add(new Characters.LowerP());
             characterSet.Add(new Characters.LowerQ());
             characterSet.Add(new Characters.LowerR());
@@ -82,14 +84,19 @@
             characterSet.Add(new Characters.SpecialSpace());
             characterSet.Add(new Characters.SpecialAt());
             characterSet.Add(new Characters.SpecialColon());
+            characterSet.Add(new Characters.SpecialSemiColon());
             characterSet.Add(new Characters.SpecialDot());
+            characterSet.Add(new Characters.SpecialComma());
             characterSet.Add(new Characters.SpecialBracketOpen());
             characterSet.Add(new Characters.SpecialBracketClosed());
             characterSet.Add(new Characters.SpecialCurlyBracketOpen());
             characterSet.Add(new Characters.SpecialCurlyBracketClosed());
             characterSet.Add(new Characters.SpecialSquareBracketOpen());
             characterSet.Add(new Characters.SpecialSquareBracketClosed());
+            characterSet.Add(new Characters.SpecialAngleBracketOpen());
+            characterSet.Add(new Characters.SpecialAngleBracketClosed());
             characterSet.Add(new Characters.SpecialSlash());
+            characterSet.Add(new Characters.SpecialBackSlash());
             characterSet.Add(new Characters.SpecialExclamation());
             characterSet.Add(new Characters.SpecialHyphen());
             characterSet.Add(new Characters.SpecialApostrophe());
@@ -106,10 +113,13 @@
             characterSet.Add(new Characters.SpecialTilde());
             characterSet.Add(new Characters.SpecialNegation());
             characterSet.Add(new Characters.SpecialVerticalBar());
+            characterSet.Add(new Characters.SpecialBrokenBar());
             characterSet.Add(new Characters.SpecialCent());
             characterSet.Add(new Characters.SpecialPound());
             characterSet.Add(new Characters.SpecialUnderline());
             characterSet.Add(new Characters.SpecialCircumflex());
+            characterSet.Add(new Characters.SpecialDiaeresis());
+            characterSet.Add(new Characters.SpecialHashTag());
         }
 
         public void ScreenCaptureTest()
