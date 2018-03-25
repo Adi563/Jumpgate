@@ -149,6 +149,12 @@
                 }
 
                 graphicsOld.DrawImage(bitmapNew, 0, 0);
+
+                if (!bitmapNew.GetPixel(0, 0).Equals(System.Drawing.Color.FromArgb(255, 10, 10, 10))) { continue; }
+
+                var text = ConvertChatImageToText(bitmapNew);
+
+                System.IO.File.AppendAllText(@"C:\Users\Adrian\Downloads\Temp\chat.txt", text);
             }
         }
 
