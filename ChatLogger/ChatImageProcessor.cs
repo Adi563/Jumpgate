@@ -146,7 +146,7 @@
 
                 if (CompareImages(bitmapOld, bitmapNew))
                 {
-                    System.Threading.Thread.Sleep(10000);
+                    System.Threading.Thread.Sleep(1000);
                     continue;
                 }
 

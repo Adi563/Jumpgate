@@ -61,6 +61,18 @@ namespace Launcher.Gui
             User32.SendMessage(process.MainWindowHandle, 0x200, 0, 0x011A01B6);
             User32.SendMessage(process.MainWindowHandle, 0x201, 0, 0);
             User32.SendMessage(process.MainWindowHandle, 0x202, 0, 0);
+
+            if (!checkBoxChatLog.Checked) { return; }
+
+            System.Threading.Thread.Sleep(5000);
+            
+            var threadChatLogging = new System.Threading.Thread(StartChatLogging);
+            threadChatLogging.Start();
+        }
+
+        private void StartChatLogging()
+        {
+            new ChatLogger.ChatImageProcessor().ScreenCaptureTest(textBoxChatLogFilePath.Text);
         }
 
         private void buttonAddUser_Click(object sender, EventArgs e)
