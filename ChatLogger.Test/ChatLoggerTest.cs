@@ -33,7 +33,7 @@ namespace ChatLogger.Test
         [TestMethod]
         public void ScreenCaptureTest()
         {
-            new ChatImageProcessor().ScreenCaptureTest();
+            new ChatImageProcessor().ScreenCaptureTest(@"C:\Users\Adrian\Downloads\Temp\chat.txt");
         }
 
         [TestMethod]

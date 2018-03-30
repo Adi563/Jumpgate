@@ -131,12 +131,14 @@
         /// <summary>
         /// Screens the capture test.
         /// </summary>
-        public void ScreenCaptureTest()
+        public void ScreenCaptureTest(string logFilePath)
         {
             var bitmapOld = new System.Drawing.Bitmap(ChatWidth, ChatHeight);
             var graphicsOld = System.Drawing.Graphics.FromImage(bitmapOld);
             var bitmapNew = new System.Drawing.Bitmap(ChatWidth, ChatHeight);
             var graphicsNew = System.Drawing.Graphics.FromImage(bitmapNew);
+
+            var stream = new System.IO.FileStream(logFilePath, System.IO.FileMode.OpenOrCreate, System.IO.FileAccess.ReadWrite);
 
             while (true)
             {
@@ -154,8 +156,44 @@
 
                 var text = ConvertChatImageToText(bitmapNew);
 
-                System.IO.File.AppendAllText(@"C:\Users\Adrian\Downloads\Temp\chat.txt", text);
+                var numberOfLinesAdded = GetNumberOfLinesAdded(stream, text);
+                
+                var subText = text.Substring(text.Length - (numberOfLinesAdded * MaximumCharactersPerLine + numberOfLinesAdded * 2));
+                var subTextCharArray = subText.ToCharArray();
+                var subTextByteArray = subTextCharArray.Select(b => (byte)b).ToArray();
+
+                stream.Write(subTextByteArray, 0, subTextByteArray.Length);
+                stream.Flush();
             }
+        }
+
+        public byte GetNumberOfLinesAdded(System.IO.Stream stream, string text)
+        {
+            if (stream.Length < LinesPerChat * MaximumCharactersPerLine) { return LinesPerChat; }
+
+            var data = new byte[LinesPerChat * MaximumCharactersPerLine + LinesPerChat * 2];
+            stream.Position = stream.Length - data.Length;
+            stream.Read(data, 0, data.Length);
+
+            var chatText = System.Text.Encoding.ASCII.GetString(data);
+
+            var chatTextElements = chatText.Split(new string[] { "\r\n" }, System.StringSplitOptions.None);
+
+            var textElements = text.Split(new string[] { "\r\n" }, System.StringSplitOptions.None);
+
+            if (chatTextElements[0].Equals(textElements[0]) && chatTextElements[1].Equals(textElements[1]) && chatTextElements[2].Equals(textElements[2]) && chatTextElements[3].Equals(textElements[3]) && chatTextElements[4].Equals(textElements[4]) && chatTextElements[5].Equals(textElements[5])) { return 0; }
+
+            if (chatTextElements[1].Equals(textElements[0]) && chatTextElements[2].Equals(textElements[1]) && chatTextElements[3].Equals(textElements[2]) && chatTextElements[4].Equals(textElements[3]) && chatTextElements[5].Equals(textElements[4])) { return 1; }
+
+            if (chatTextElements[2].Equals(textElements[0]) && chatTextElements[3].Equals(textElements[1]) && chatTextElements[4].Equals(textElements[2]) && chatTextElements[5].Equals(textElements[3])) { return 2; }
+
+            if (chatTextElements[3].Equals(textElements[0]) && chatTextElements[4].Equals(textElements[1]) && chatTextElements[5].Equals(textElements[2])) { return 3; }
+
+            if (chatTextElements[4].Equals(textElements[0]) && chatTextElements[5].Equals(textElements[1])) { return 4; }
+
+            if (chatTextElements[5].Equals(textElements[0])) { return 5; }
+
+            return 6;
         }
 
 
