@@ -5,6 +5,8 @@ namespace Launcher.Gui
 {
     public partial class Form1 : Form
     {
+        private System.Threading.Thread threadChatLogging;
+
         public Form1()
         {
             InitializeComponent();
@@ -64,9 +66,9 @@ namespace Launcher.Gui
 
             if (!checkBoxChatLog.Checked) { return; }
 
+            threadChatLogging = new System.Threading.Thread(StartChatLogging);
             System.Threading.Thread.Sleep(5000);
             
-            var threadChatLogging = new System.Threading.Thread(StartChatLogging);
             threadChatLogging.Start();
         }
 
