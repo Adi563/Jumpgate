@@ -57,6 +57,7 @@
     </Otherwise>
   </Choose>
   <ItemGroup>
+    <Compile Include="VmImageCaptureTest.cs" />
     <Compile Include="ChatLoggerTest.cs" />
     <Compile Include="Properties\AssemblyInfo.cs" />
     <Compile Include="Service References\OcrWebService\Reference.cs">
