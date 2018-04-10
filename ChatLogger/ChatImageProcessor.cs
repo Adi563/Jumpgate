@@ -6,10 +6,8 @@
     {
         const int ChatPositionX = 81;
         const int ChatPositionY = 31;
-        const int ChatWidth = 354;
-        const int ChatHeight = 66;
 
-        const byte MaximumCharactersPerLine = 59;
+        const byte MaximumCharactersPerLine = 69;
         const byte LinesPerChat = 6;
         const byte CharacterWidth = 6;
         const byte CharacterHeight = 11;
@@ -133,9 +131,12 @@
         /// </summary>
         public void ScreenCaptureTest(string logFilePath)
         {
-            var bitmapOld = new System.Drawing.Bitmap(ChatWidth, ChatHeight);
+            var chatWidth = MaximumCharactersPerLine * CharacterWidth;
+            var chatHeight = LinesPerChat * CharacterHeight;
+
+            var bitmapOld = new System.Drawing.Bitmap(chatWidth, chatHeight);
             var graphicsOld = System.Drawing.Graphics.FromImage(bitmapOld);
-            var bitmapNew = new System.Drawing.Bitmap(ChatWidth, ChatHeight);
+            var bitmapNew = new System.Drawing.Bitmap(chatWidth, chatHeight);
             var graphicsNew = System.Drawing.Graphics.FromImage(bitmapNew);
 
             var stream = new System.IO.FileStream(logFilePath, System.IO.FileMode.OpenOrCreate, System.IO.FileAccess.ReadWrite);
@@ -164,6 +165,42 @@
 
                 stream.Write(subTextByteArray, 0, subTextByteArray.Length);
                 stream.Flush();
+            }
+        }
+
+        public void ConvertImagesToText(string logFilePath, string imagePath)
+        {
+            var stream = new System.IO.FileStream(logFilePath, System.IO.FileMode.OpenOrCreate, System.IO.FileAccess.ReadWrite);
+            var chatWidth = MaximumCharactersPerLine * CharacterWidth;
+            var chatHeight = LinesPerChat * CharacterHeight;
+
+            while (true)
+            {
+                var filePathImages = System.IO.Directory.GetFiles(imagePath, "*.png", System.IO.SearchOption.TopDirectoryOnly);
+                var filePathImage = filePathImages.FirstOrDefault();
+                if (filePathImage == null) { continue; }
+
+                var image = (System.Drawing.Bitmap)System.Drawing.Bitmap.FromFile(filePathImage);
+                
+                var imageCropped = image.Clone(new System.Drawing.Rectangle(ChatPositionX, ChatPositionY, chatWidth, chatHeight), System.Drawing.Imaging.PixelFormat.Format24bppRgb);
+                image.Dispose();
+
+                if (!imageCropped.GetPixel(0, 0).Equals(System.Drawing.Color.FromArgb(255, 8, 8, 8))) { continue; }
+
+                var text = ConvertChatImageToText(imageCropped);
+
+                var numberOfLinesAdded = GetNumberOfLinesAdded(stream, text);
+
+                var subText = text.Substring(text.Length - (numberOfLinesAdded * MaximumCharactersPerLine + numberOfLinesAdded * 2));
+                var subTextCharArray = subText.ToCharArray();
+                var subTextByteArray = subTextCharArray.Select(b => (byte)b).ToArray();
+
+                stream.Write(subTextByteArray, 0, subTextByteArray.Length);
+                stream.Flush();
+
+                System.IO.File.Move(filePathImage, imagePath + "\\Processed\\" + System.IO.Path.GetFileName(filePathImage));
+
+                System.Threading.Thread.Sleep(9000);
             }
         }
 
@@ -204,10 +241,12 @@
         /// <returns></returns>
         public System.Drawing.Image GetChatImageFromScreenshot(System.Drawing.Image screenshot)
         {
-            var chatImage = new System.Drawing.Bitmap(ChatWidth, ChatHeight);
+            var chatWidth = MaximumCharactersPerLine * CharacterWidth;
+            var chatHeight = LinesPerChat * CharacterHeight;
+            var chatImage = new System.Drawing.Bitmap(chatWidth, chatHeight);
             var chatGraphics = System.Drawing.Graphics.FromImage(chatImage);
 
-            chatGraphics.DrawImage(screenshot, new System.Drawing.Rectangle(0, 0, ChatWidth, ChatHeight), ChatPositionX, ChatPositionY, ChatWidth, ChatHeight, System.Drawing.GraphicsUnit.Pixel);
+            chatGraphics.DrawImage(screenshot, new System.Drawing.Rectangle(0, 0, chatWidth, chatHeight), ChatPositionX, ChatPositionY, chatWidth, chatHeight, System.Drawing.GraphicsUnit.Pixel);
             return chatImage;
         }
 

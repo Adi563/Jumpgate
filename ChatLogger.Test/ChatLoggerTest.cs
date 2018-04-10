@@ -37,6 +37,12 @@ namespace ChatLogger.Test
         }
 
         [TestMethod]
+        public void ConvertImagesToText()
+        {
+            new ChatImageProcessor().ConvertImagesToText(@"C:\Users\Adrian\Downloads\Jumpgate\chatlog.txt", @"C:\Users\Adrian\Downloads\Jumpgate\");
+        }
+
+        [TestMethod]
         public void GetChatImageFromScreenshot()
         {
             var screenshot = System.Drawing.Bitmap.FromFile(@"C:\Users\Adrian\Downloads\Temp\VirtualBox_Jumpgate_23_03_2018_10_40_27.png");

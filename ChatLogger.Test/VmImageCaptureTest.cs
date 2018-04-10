@@ -8,7 +8,11 @@ namespace ChatLogger.Test
         [TestMethod]
         public void TakeScreenShot()
         {
-            VmImageCapture.TakeScreenShot(@"C:\Program Files\Oracle\VirtualBox\VBoxManage", "Jumpgate", $@"C:\Users\Adrian\Downloads\Temp\{System.DateTime.Now.ToString("yyyyMMddHHmmss")}.png");
+            while (true)
+            {
+                VmImageCapture.TakeScreenShot(@"C:\Program Files\Oracle\VirtualBox\VBoxManage", "Jumpgate", $@"C:\Users\Adrian\Downloads\Jumpgate\{System.DateTime.Now.ToString("yyyyMMddHHmmss")}.png");
+                System.Threading.Thread.Sleep(10000);
+            }
         }
     }
 }
